@@ -1,15 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.gdm.hermanas.model;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import lombok.Data;
 
 @Data
-public class Estoque {
-    private Integer id;
+@Entity
+public class Estoque implements Serializable {
+    @Id
+    @GeneratedValue
+    private long id;
+    
     private int inicial;
     private int atual;
     private int minimo;

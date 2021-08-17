@@ -3,11 +3,15 @@ package com.gdm.hermanas.app;
 import com.gdm.hermanas.telas.TelaClientes;
 
 import com.gdm.hermanas.telas.TelaMasterLogin;
+import com.gdm.hermanas.telas.TelaPdv;
 import com.gdm.hermanas.telas.TelaProdutos;
 import java.awt.Dimension;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public final class App extends javax.swing.JFrame {
 
@@ -15,10 +19,13 @@ public final class App extends javax.swing.JFrame {
     private TelaProdutos telaProdutos;
     public static int privacity = 0;
 
+    private TelaPdv telaPdv;
+
     public App() {
         initComponents();
-        showTelaProdutos();
-       
+      
+        //showTelaProdutos();
+
     }
 
     @SuppressWarnings("unchecked")
@@ -36,6 +43,8 @@ public final class App extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JToolBar.Separator();
         jButton6 = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JToolBar.Separator();
+        jButton7 = new javax.swing.JButton();
+        jSeparator6 = new javax.swing.JToolBar.Separator();
         jButton4 = new javax.swing.JButton();
         desktop = new javax.swing.JDesktopPane();
 
@@ -63,7 +72,7 @@ public final class App extends javax.swing.JFrame {
         toolbar.add(jButton1);
         toolbar.add(jSeparator1);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/dinheiro.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/produto.png"))); // NOI18N
         jButton2.setText(" Meus Produtos ");
         jButton2.setBorderPainted(false);
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -120,6 +129,19 @@ public final class App extends javax.swing.JFrame {
         toolbar.add(jButton6);
         toolbar.add(jSeparator5);
 
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/barcode.png"))); // NOI18N
+        jButton7.setText(" Vendas PDV ");
+        jButton7.setFocusable(false);
+        jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        toolbar.add(jButton7);
+        toolbar.add(jSeparator6);
+
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-menos-48.png"))); // NOI18N
         jButton4.setText(" Fechar ");
         jButton4.setBorderPainted(false);
@@ -150,7 +172,7 @@ public final class App extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(toolbar, javax.swing.GroupLayout.DEFAULT_SIZE, 1034, Short.MAX_VALUE)
+            .addComponent(toolbar, javax.swing.GroupLayout.DEFAULT_SIZE, 1828, Short.MAX_VALUE)
             .addComponent(desktop)
         );
         layout.setVerticalGroup(
@@ -219,8 +241,21 @@ public final class App extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "Função em desenvolvimento","Aguarde..",1);
+        JOptionPane.showMessageDialog(rootPane, "Função em desenvolvimento", "Aguarde..", 1);
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        if (telaPdv == null) {
+            telaPdv = new TelaPdv();
+            desktop.add(telaPdv);
+        }
+        telaPdv.setVisible(true);
+        telaPdv.toFront();
+
+        Dimension desktopSize = desktop.getSize();
+        Dimension screenSize = telaPdv.getSize();
+        telaPdv.setLocation((desktopSize.width - screenSize.width) / 2, (desktopSize.height - screenSize.height) / 2);
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     public void hideFrames() {
         for (JInternalFrame tela : desktop.getAllFrames()) {
@@ -237,13 +272,9 @@ public final class App extends javax.swing.JFrame {
 
         privacity = 0;
     }
-    
-      public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+
+    public static void main(String args[]) {
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -252,18 +283,11 @@ public final class App extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AppPdv.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AppPdv.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AppPdv.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AppPdv.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
+        } catch (InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new App().setVisible(true);
@@ -279,11 +303,13 @@ public final class App extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JToolBar.Separator jSeparator5;
+    private javax.swing.JToolBar.Separator jSeparator6;
     private javax.swing.JToolBar toolbar;
     // End of variables declaration//GEN-END:variables
 }

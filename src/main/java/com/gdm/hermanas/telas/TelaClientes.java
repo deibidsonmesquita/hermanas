@@ -77,7 +77,15 @@ public class TelaClientes extends javax.swing.JInternalFrame implements ProcessR
             new String [] {
                 "Codigo", "Nome", "Telefone 1", "Telefone 2", "CPF", "Sexo", "Aniversário"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true, true, false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tabelaClientes.setGridColor(new java.awt.Color(239, 248, 252));
         tabelaClientes.setRowHeight(32);
         tabelaClientes.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -93,11 +101,13 @@ public class TelaClientes extends javax.swing.JInternalFrame implements ProcessR
             tabelaClientes.getColumnModel().getColumn(5).setMaxWidth(65);
         }
 
+        btndelete.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btndelete.setForeground(new java.awt.Color(204, 0, 0));
         btndelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-lixo-24.png"))); // NOI18N
         btndelete.setText("Deletar cliente");
         btndelete.setBorderPainted(false);
         btndelete.setEnabled(false);
+        btndelete.setOpaque(true);
         btndelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btndeleteActionPerformed(evt);
@@ -105,6 +115,7 @@ public class TelaClientes extends javax.swing.JInternalFrame implements ProcessR
         });
 
         jButton2.setBackground(new java.awt.Color(51, 153, 255));
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("+ Novo Cadastro");
         jButton2.setBorderPainted(false);
@@ -114,6 +125,7 @@ public class TelaClientes extends javax.swing.JInternalFrame implements ProcessR
             }
         });
 
+        txtbusca.setBackground(new java.awt.Color(252, 252, 238));
         txtbusca.setBorder(null);
         txtbusca.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -149,18 +161,20 @@ public class TelaClientes extends javax.swing.JInternalFrame implements ProcessR
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtbusca, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtbusca, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(4, 4, 4)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btndelete)
-                    .addComponent(txtMsn, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
-                .addGap(6, 6, 6))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btndelete, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtMsn, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(9, 9, 9))))
         );
 
         pack();

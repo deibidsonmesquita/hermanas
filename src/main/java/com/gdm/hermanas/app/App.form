@@ -27,7 +27,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="toolbar" pref="1034" max="32767" attributes="0"/>
+          <Component id="toolbar" pref="1828" max="32767" attributes="0"/>
           <Component id="desktop" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
@@ -78,7 +78,7 @@
         <Component class="javax.swing.JButton" name="jButton2">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/imagens/dinheiro.png"/>
+              <Image iconType="3" name="/imagens/produto.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value=" Meus Produtos "/>
             <Property name="borderPainted" type="boolean" value="false"/>
@@ -145,6 +145,22 @@
           </Events>
         </Component>
         <Component class="javax.swing.JToolBar$Separator" name="jSeparator5">
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton7">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/imagens/barcode.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value=" Vendas PDV "/>
+            <Property name="focusable" type="boolean" value="false"/>
+            <Property name="horizontalTextPosition" type="int" value="0"/>
+            <Property name="verticalTextPosition" type="int" value="3"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton7ActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JToolBar$Separator" name="jSeparator6">
         </Component>
         <Component class="javax.swing.JButton" name="jButton4">
           <Properties>

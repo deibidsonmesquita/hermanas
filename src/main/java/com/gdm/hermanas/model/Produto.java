@@ -3,9 +3,11 @@ package com.gdm.hermanas.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import lombok.Data;
 
 @Entity
@@ -13,7 +15,7 @@ import lombok.Data;
 public class Produto implements Serializable {
     @Id
     @GeneratedValue
-    private Integer id;
+    private long id;
     private String nome;
     private BigDecimal valorVenda;
     private BigDecimal valorCusto;
@@ -25,5 +27,6 @@ public class Produto implements Serializable {
     private String obs;
     private String tamanho;
     
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Estoque estoque;
 }

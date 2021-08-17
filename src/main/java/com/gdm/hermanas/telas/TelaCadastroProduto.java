@@ -7,6 +7,7 @@ package com.gdm.hermanas.telas;
 
 import com.gdm.hermanas.model.Estoque;
 import com.gdm.hermanas.model.Produto;
+import com.gdm.hermanas.repositorio.ProdutoRepository;
 import javax.swing.JOptionPane;
 
 /**
@@ -58,6 +59,7 @@ public class TelaCadastroProduto extends javax.swing.JDialog {
         jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Novo produto");
 
         panel.setBackground(new java.awt.Color(94, 147, 196));
 
@@ -201,12 +203,9 @@ public class TelaCadastroProduto extends javax.swing.JDialog {
                                 .addComponent(txtValorVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(panelLayout.createSequentialGroup()
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(panelLayout.createSequentialGroup()
-                                .addComponent(jLabel12)
-                                .addGap(1, 1, 1))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelLayout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(1, 1, 1)))
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(1, 1, 1)
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtAjuste, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtValorPromocao, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -245,6 +244,7 @@ public class TelaCadastroProduto extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -261,14 +261,13 @@ public class TelaCadastroProduto extends javax.swing.JDialog {
             produto.setValorVenda(txtValorVenda.getValue());
             produto.setValorPromo(txtValorPromocao.getValue());
             produto.setValorCusto(txtValorCusto.getValue());
-            
+
             Estoque eq = new Estoque();
-            eq.setInicial((int) txtEstoque.getValue());
-  
+            eq.setInicial(Integer.parseInt(String.valueOf(txtEstoque.getValue())));
+
+            new ProdutoRepository().saveOrUpdate(produto);
 
             JOptionPane.showMessageDialog(panel, "Cadastro efetuado com sucesso", "Confirmação", 1);
-          //  processRetorno.update();
-            //clear();
 
         } else {
             JOptionPane.showMessageDialog(panel, "Preencha todos os campos", "Atenção", 0);

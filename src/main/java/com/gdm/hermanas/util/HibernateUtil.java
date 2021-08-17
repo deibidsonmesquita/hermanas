@@ -22,9 +22,9 @@ public class HibernateUtil {
         java.util.logging.Logger.getLogger("org.hibernate").setLevel(Level.OFF);
         Configuration configuration = new Configuration();
 
-        configuration.setProperty("hibernate.connection.url", "jdbc:hsqldb:file:~/pantoja/data");
-        configuration.setProperty("hibernate.connection.username", "pantoja");
-        configuration.setProperty("hibernate.connection.password", "pantoja");
+        configuration.setProperty("hibernate.connection.url", "jdbc:hsqldb:file:~/hermanas/data");
+        configuration.setProperty("hibernate.connection.username", "hermanas");
+        configuration.setProperty("hibernate.connection.password", "hermanas");
         configuration.setProperty("hibernate.connection.pool_size", "10");
 
         final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
