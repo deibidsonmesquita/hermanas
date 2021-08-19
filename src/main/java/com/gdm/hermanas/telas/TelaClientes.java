@@ -4,7 +4,7 @@ import com.gdm.hermanas.model.Cliente;
 import com.gdm.hermanas.repositorio.ClienteRepository;
 import com.gdm.hermanas.repositorio.GenericDao;
 
-import com.gdm.pantoja.app.util.ProcessRetorno;
+import com.gdm.hermanas.util.ProcessRetorno;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
@@ -142,7 +142,7 @@ public class TelaClientes extends javax.swing.JInternalFrame implements ProcessR
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 892, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 951, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

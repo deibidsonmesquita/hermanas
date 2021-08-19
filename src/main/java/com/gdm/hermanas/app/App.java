@@ -49,7 +49,7 @@ public final class App extends javax.swing.JFrame {
         desktop = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("HERMANAS  v1.0");
+        setTitle("Hermanas  v1.0");
         setExtendedState(MAXIMIZED_BOTH);
 
         toolbar.setBackground(new java.awt.Color(0, 0, 0));

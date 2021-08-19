@@ -4,7 +4,7 @@ package com.gdm.hermanas.telas;
 import com.gdm.hermanas.model.Cliente;
 import com.gdm.hermanas.model.Endereco;
 import com.gdm.hermanas.repositorio.ClienteRepository;
-import com.gdm.pantoja.app.util.ProcessRetorno;
+import com.gdm.hermanas.util.ProcessRetorno;
 import javax.swing.JOptionPane;
 
 public class TelaCadastroCliente extends javax.swing.JDialog {

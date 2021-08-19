@@ -38,15 +38,15 @@ public class Splash extends JWindow {
         progress.setBorderPainted(false);
 
         content.setBackground(Color.white);
-        int width = 480;
-        int height = 340;
+        int width = 780;
+        int height = 405;
         Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (screen.width - width) / 2;
         int y = (screen.height - height) / 2;
         setBounds(x, y, width, height);
         JLabel label = new JLabel();
 
-        label.setIcon(new ImageIcon(getClass().getResource("/imagens/splash.png")));
+        label.setIcon(new ImageIcon(getClass().getResource("/imagens/bg.png")));
         content.add(label, "Center");
         content.add(progress, BorderLayout.SOUTH);
 
@@ -81,7 +81,7 @@ public class Splash extends JWindow {
 
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 //Windows, Metal, Nimbus
-                if ("Metal".equals(info.getName())) {
+                if ("Nimbus".equals(info.getName())) {
                     UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
