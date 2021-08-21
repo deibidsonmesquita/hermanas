@@ -48,14 +48,13 @@ public abstract class GenericDao<T> {
         }
     }
 
-    public Object find(Class clazz, Long id) {
-        Object obj = null;
+    public T find(Class<T> clazz, Long id) {
         Session s = factory.openSession();
         s.beginTransaction();
-        obj = s.get(clazz, id);
+        T tipo = s.get(clazz, id);
         s.getTransaction().commit();
         s.close();
 
-        return obj;
+        return tipo;
     }
 }

@@ -50,22 +50,27 @@ public class TelaCadastroProduto extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Novo produto");
 
-        panel.setBackground(new java.awt.Color(94, 147, 196));
+        panel.setBackground(new java.awt.Color(44, 75, 98));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
         jLabel1.setText("Nome Produto:");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(204, 204, 204));
         jLabel2.setText("Preço Custo:");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(204, 204, 204));
         jLabel3.setText("Preço Venda:");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(204, 204, 204));
         jLabel4.setText("Estoque Inicial:");
 
-        jButton1.setBackground(new java.awt.Color(204, 255, 204));
+        jButton1.setBackground(new java.awt.Color(0, 102, 153));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(204, 204, 204));
         jButton1.setText("Efetuar cadastro");
         jButton1.setBorderPainted(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -79,6 +84,7 @@ public class TelaCadastroProduto extends javax.swing.JDialog {
         txtEstoque.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(204, 204, 204));
         jLabel6.setText("Codigo de Barras:");
 
         txtnome.setBorder(null);
@@ -86,14 +92,17 @@ public class TelaCadastroProduto extends javax.swing.JDialog {
         txtcodigoBar.setBorder(null);
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(204, 204, 204));
         jLabel12.setText("Ajuste (%):");
 
         txtAjuste.setText("0");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(204, 204, 204));
         jLabel5.setText("Preço Promoção:");
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(204, 204, 204));
         jLabel7.setText("Cor do Produto:");
 
         txtCor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DOURADO", "PRETO", "BRANCO", "AMARELO", "AZUL", "VERMELHO", "ROSA", "CINZA", "BEGE", "VERDE", "MARRON", " " }));
@@ -101,15 +110,18 @@ public class TelaCadastroProduto extends javax.swing.JDialog {
         txtTamanho.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "M", "P", "G", "XG", "XXG" }));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(204, 204, 204));
         jLabel8.setText("Tamanho:");
 
         txtObs.setBorder(null);
 
+        jLabel9.setForeground(new java.awt.Color(204, 204, 204));
         jLabel9.setText("Observação: (Opcional)");
 
         txtUnt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "UND", "PAR", "PÇA", "KIT", " " }));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(204, 204, 204));
         jLabel10.setText("Unidade:");
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);

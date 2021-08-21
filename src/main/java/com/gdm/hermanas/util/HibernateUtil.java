@@ -4,7 +4,9 @@ import com.gdm.hermanas.model.Cliente;
 
 import com.gdm.hermanas.model.Endereco;
 import com.gdm.hermanas.model.Estoque;
+import com.gdm.hermanas.model.Item;
 import com.gdm.hermanas.model.Produto;
+import com.gdm.hermanas.model.Venda;
 
 import java.util.logging.Level;
 import org.hibernate.SessionFactory;
@@ -37,6 +39,8 @@ public class HibernateUtil {
                     .addAnnotatedClass(Endereco.class)
                     .addAnnotatedClass(Produto.class)
                     .addAnnotatedClass(Estoque.class)
+                    .addAnnotatedClass(Item.class)
+                    .addAnnotatedClass(Venda.class)
                     .buildMetadata()
                     .buildSessionFactory();
 

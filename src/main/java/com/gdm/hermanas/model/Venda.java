@@ -1,14 +1,29 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.gdm.hermanas.model;
 
-/**
- *
- * @author deibi
- */
-public class Venda {
-    
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import lombok.Data;
+
+@Entity
+@Data
+public class Venda implements Serializable {
+
+    @Id
+    @GeneratedValue
+    private long id;
+    private BigDecimal total;
+    private LocalDate dataVenda;
+    private String repsonsavel;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "venda")
+    private List<Item> itens = new ArrayList<>();
+
 }

@@ -11,6 +11,7 @@ import com.gdm.hermanas.repositorio.ProdutoRepository;
 import com.gdm.hermanas.util.ProcessRetorno;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 public class TelaProdutos extends javax.swing.JInternalFrame implements ProcessRetorno{
 
@@ -57,6 +58,8 @@ public class TelaProdutos extends javax.swing.JInternalFrame implements ProcessR
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
+        busca = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
@@ -94,6 +97,15 @@ public class TelaProdutos extends javax.swing.JInternalFrame implements ProcessR
             tabela.getColumnModel().getColumn(6).setMaxWidth(95);
         }
 
+        busca.setBackground(new java.awt.Color(255, 255, 232));
+        busca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                buscaKeyTyped(evt);
+            }
+        });
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-pesquisar-24.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -101,9 +113,12 @@ public class TelaProdutos extends javax.swing.JInternalFrame implements ProcessR
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 937, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 818, Short.MAX_VALUE)
+                        .addComponent(busca, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1)))
                 .addContainerGap())
         );
@@ -113,7 +128,10 @@ public class TelaProdutos extends javax.swing.JInternalFrame implements ProcessR
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(busca, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
                 .addGap(9, 9, 9))
         );
 
@@ -125,9 +143,18 @@ public class TelaProdutos extends javax.swing.JInternalFrame implements ProcessR
         tp.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void buscaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscaKeyTyped
+        DefaultTableModel table = (DefaultTableModel) tabela.getModel();
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(table);
+        tabela.setRowSorter(tr);
+        tr.setRowFilter(javax.swing.RowFilter.regexFilter(busca.getText().toUpperCase()));
+    }//GEN-LAST:event_buscaKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField busca;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabela;
     // End of variables declaration//GEN-END:variables

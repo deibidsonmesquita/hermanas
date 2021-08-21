@@ -1,14 +1,39 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.gdm.hermanas.model;
 
-/**
- *
- * @author deibi
- */
-public class Item {
+import java.io.Serializable;
+import java.math.BigDecimal;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import lombok.Data;
+
+@Entity
+@Data
+public class Item implements Serializable {
+    
+    @Id
+    @GeneratedValue
+    private long id;
+   
+    @OneToOne
+    private Produto produto;
+    
+    private int qtde;
+    private BigDecimal subtotal;
+    
+    @ManyToOne
+    private Venda venda;
+
+    public Item(int qtde) {
+        this.qtde = qtde;
+    }
+
+    public Item() {
+    }
+    
+    
     
 }
