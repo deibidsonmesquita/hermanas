@@ -31,7 +31,7 @@ public abstract class GenericDao<T> {
         }
     }
 
-    public void delete(Object o) {
+    public void delete(T o) {
         try (Session s = factory.openSession()) {
             s.beginTransaction();
             s.remove(o);

@@ -81,7 +81,7 @@ public class Splash extends JWindow {
 
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 //Windows, Metal, Nimbus
-                if ("Nimbus".equals(info.getName())) {
+                if ("Metal".equals(info.getName())) {
                     UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

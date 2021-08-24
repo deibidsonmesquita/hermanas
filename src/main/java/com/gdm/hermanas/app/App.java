@@ -1,6 +1,7 @@
 package com.gdm.hermanas.app;
 
 import com.gdm.hermanas.telas.TelaClientes;
+import com.gdm.hermanas.telas.TelaFornecedores;
 
 import com.gdm.hermanas.telas.TelaMasterLogin;
 import com.gdm.hermanas.telas.TelaPdv;
@@ -47,6 +48,16 @@ public final class App extends javax.swing.JFrame {
         jSeparator6 = new javax.swing.JToolBar.Separator();
         jButton4 = new javax.swing.JButton();
         desktop = new javax.swing.JDesktopPane();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jSeparator7 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jSeparator8 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jSeparator9 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Hermanas  v1.0");
@@ -131,6 +142,8 @@ public final class App extends javax.swing.JFrame {
 
         jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/barcode.png"))); // NOI18N
         jButton7.setText(" Vendas PDV ");
+        jButton7.setBorder(null);
+        jButton7.setBorderPainted(false);
         jButton7.setFocusable(false);
         jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -165,8 +178,41 @@ public final class App extends javax.swing.JFrame {
         );
         desktopLayout.setVerticalGroup(
             desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 522, Short.MAX_VALUE)
+            .addGap(0, 499, Short.MAX_VALUE)
         );
+
+        jMenu1.setText("Cadastros");
+
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/lock_security.png"))); // NOI18N
+        jMenuItem1.setText("Usuários do Sistema");
+        jMenu1.add(jMenuItem1);
+        jMenu1.add(jSeparator7);
+
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/consumer.png"))); // NOI18N
+        jMenuItem2.setText("Meus Fornecedores");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
+        jMenu1.add(jSeparator8);
+
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/consumer_1.png"))); // NOI18N
+        jMenuItem3.setText("Meus Clientes");
+        jMenu1.add(jMenuItem3);
+        jMenu1.add(jSeparator9);
+
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/produto.png"))); // NOI18N
+        jMenuItem4.setText("Meus Produtos");
+        jMenu1.add(jMenuItem4);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Ajuda");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -249,13 +295,21 @@ public final class App extends javax.swing.JFrame {
             telaPdv = new TelaPdv();
             desktop.add(telaPdv);
         }
+        
         telaPdv.setVisible(true);
         telaPdv.toFront();
 
         Dimension desktopSize = desktop.getSize();
         Dimension screenSize = telaPdv.getSize();
         telaPdv.setLocation((desktopSize.width - screenSize.width) / 2, (desktopSize.height - screenSize.height) / 2);
+        telaPdv.txtCodigoBar.requestFocus();
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        TelaFornecedores fn = new TelaFornecedores(this, rootPaneCheckingEnabled);
+       
+        fn.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     public void hideFrames() {
         for (JInternalFrame tela : desktop.getAllFrames()) {
@@ -304,12 +358,22 @@ public final class App extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JToolBar.Separator jSeparator5;
     private javax.swing.JToolBar.Separator jSeparator6;
+    private javax.swing.JPopupMenu.Separator jSeparator7;
+    private javax.swing.JPopupMenu.Separator jSeparator8;
+    private javax.swing.JPopupMenu.Separator jSeparator9;
     private javax.swing.JToolBar toolbar;
     // End of variables declaration//GEN-END:variables
 }

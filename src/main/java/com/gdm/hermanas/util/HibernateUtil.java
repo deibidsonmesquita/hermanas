@@ -4,6 +4,7 @@ import com.gdm.hermanas.model.Cliente;
 
 import com.gdm.hermanas.model.Endereco;
 import com.gdm.hermanas.model.Estoque;
+import com.gdm.hermanas.model.Fornecedor;
 import com.gdm.hermanas.model.Item;
 import com.gdm.hermanas.model.Produto;
 import com.gdm.hermanas.model.Venda;
@@ -41,6 +42,7 @@ public class HibernateUtil {
                     .addAnnotatedClass(Estoque.class)
                     .addAnnotatedClass(Item.class)
                     .addAnnotatedClass(Venda.class)
+                    .addAnnotatedClass(Fornecedor.class)
                     .buildMetadata()
                     .buildSessionFactory();
 

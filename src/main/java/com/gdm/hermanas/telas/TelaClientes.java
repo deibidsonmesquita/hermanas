@@ -104,7 +104,7 @@ public class TelaClientes extends javax.swing.JInternalFrame implements ProcessR
         btndelete.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btndelete.setForeground(new java.awt.Color(204, 0, 0));
         btndelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-lixo-24.png"))); // NOI18N
-        btndelete.setText("Deletar cliente");
+        btndelete.setText("Deletar Cliente");
         btndelete.setBorderPainted(false);
         btndelete.setEnabled(false);
         btndelete.setOpaque(true);
@@ -151,7 +151,7 @@ public class TelaClientes extends javax.swing.JInternalFrame implements ProcessR
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btndelete, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btndelete, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)

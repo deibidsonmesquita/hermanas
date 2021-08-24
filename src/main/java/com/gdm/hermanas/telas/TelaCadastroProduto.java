@@ -1,12 +1,15 @@
-
 package com.gdm.hermanas.telas;
 
 import com.gdm.hermanas.model.Estoque;
+import com.gdm.hermanas.model.Fornecedor;
 import com.gdm.hermanas.model.Produto;
+import com.gdm.hermanas.repositorio.FornecedorRepository;
 import com.gdm.hermanas.repositorio.ProdutoRepository;
 import com.gdm.hermanas.util.ProcessRetorno;
+import java.math.BigDecimal;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
-
 
 public class TelaCadastroProduto extends javax.swing.JDialog {
 
@@ -15,7 +18,21 @@ public class TelaCadastroProduto extends javax.swing.JDialog {
     public TelaCadastroProduto(java.awt.Frame parent, boolean modal, TelaProdutos tela) {
         super(parent, modal);
         initComponents();
+
         this.processRetorno = tela;
+        listaNomesFornecedores();
+    }
+
+    private void listaNomesFornecedores() {
+        List<Fornecedor> fornecedores = new FornecedorRepository().lista(Fornecedor.class);
+        String[] nomes = new String[fornecedores.size()];
+       
+        int count = 0;
+        for (Fornecedor it : fornecedores) {
+            nomes[count] = it.getNome();
+            count++;
+        }
+        txtFornecedor.setModel(new DefaultComboBoxModel<>(nomes));
     }
 
     @SuppressWarnings("unchecked")
@@ -35,7 +52,7 @@ public class TelaCadastroProduto extends javax.swing.JDialog {
         jLabel12 = new javax.swing.JLabel();
         txtValorVenda = new com.gdm.pantoja.app.util.JNumberFormatField();
         txtValorCusto = new com.gdm.pantoja.app.util.JNumberFormatField();
-        txtAjuste = new javax.swing.JFormattedTextField();
+        txtajuste = new javax.swing.JFormattedTextField();
         txtValorPromocao = new com.gdm.pantoja.app.util.JNumberFormatField();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -46,6 +63,8 @@ public class TelaCadastroProduto extends javax.swing.JDialog {
         jLabel9 = new javax.swing.JLabel();
         txtUnt = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
+        txtFornecedor = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Novo produto");
@@ -95,7 +114,20 @@ public class TelaCadastroProduto extends javax.swing.JDialog {
         jLabel12.setForeground(new java.awt.Color(204, 204, 204));
         jLabel12.setText("Ajuste (%):");
 
-        txtAjuste.setText("0");
+        txtValorVenda.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+
+        txtValorCusto.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtValorCustoFocusLost(evt);
+            }
+        });
+
+        txtajuste.setText("0");
+        txtajuste.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtajusteFocusLost(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(204, 204, 204));
@@ -124,6 +156,12 @@ public class TelaCadastroProduto extends javax.swing.JDialog {
         jLabel10.setForeground(new java.awt.Color(204, 204, 204));
         jLabel10.setText("Unidade:");
 
+        txtFornecedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel11.setText("Fornecedor:");
+
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
@@ -150,7 +188,7 @@ public class TelaCadastroProduto extends javax.swing.JDialog {
                                     .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(panelLayout.createSequentialGroup()
                                             .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(txtAjuste, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtajuste, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(jLabel12))
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                             .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,18 +200,21 @@ public class TelaCadastroProduto extends javax.swing.JDialog {
                                             .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(jLabel3)
                                                 .addComponent(txtValorVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jLabel6)
                                         .addGroup(panelLayout.createSequentialGroup()
                                             .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel6)
+                                                .addComponent(txtTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jLabel8))
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(txtUnt, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jLabel10))
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addGroup(panelLayout.createSequentialGroup()
-                                                    .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(txtTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(jLabel8))
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(jLabel10)
-                                                        .addComponent(txtUnt, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                            .addGap(0, 0, Short.MAX_VALUE))
+                                                    .addComponent(jLabel11)
+                                                    .addGap(0, 0, Short.MAX_VALUE))
+                                                .addComponent(txtFornecedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                         .addComponent(txtcodigoBar))))
                             .addComponent(jLabel7))
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -208,7 +249,7 @@ public class TelaCadastroProduto extends javax.swing.JDialog {
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(1, 1, 1)
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtAjuste, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtajuste, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtValorPromocao, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel6)
@@ -218,12 +259,14 @@ public class TelaCadastroProduto extends javax.swing.JDialog {
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jLabel8)
-                    .addComponent(jLabel10))
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel11))
                 .addGap(1, 1, 1)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCor, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtUnt, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtUnt, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
                 .addGap(1, 1, 1)
@@ -255,7 +298,7 @@ public class TelaCadastroProduto extends javax.swing.JDialog {
             produto.setNome(txtnome.getText().toUpperCase());
             produto.setCodbar(txtcodigoBar.getText());
             produto.setObs(txtObs.getText());
-            produto.setAjuste(Double.valueOf(txtAjuste.getText()));
+            produto.setAjuste(Double.valueOf(txtajuste.getText()));
             produto.setCor(txtCor.getSelectedItem().toString());
             produto.setUnd(txtUnt.getSelectedItem().toString());
             produto.setTamanho(txtTamanho.getSelectedItem().toString());
@@ -280,11 +323,54 @@ public class TelaCadastroProduto extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
- 
+    private void txtajusteFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtajusteFocusLost
+        String replace = null;
+        if (!txtajuste.getText().trim().equals("") && !txtValorCusto.getValue().equals(0)) {
+
+            if (txtajuste.getText().contains("%") || txtajuste.getText().contains(",")) {
+                replace = txtajuste.getText().replace("%", "").replace(",", ".").trim();
+
+                txtValorVenda.setValue(txtValorCusto.getValue()
+                        .multiply(new BigDecimal(replace))
+                        .divide(new BigDecimal(100)).add(txtValorCusto.getValue()));
+
+            } else {
+                txtValorVenda.setValue(txtValorCusto.getValue()
+                        .multiply(new BigDecimal(txtajuste.getText().trim()))
+                        .divide(new BigDecimal(100)).add(txtValorCusto.getValue()));
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Informe o valor de custo do produto", "Atenção", 0);
+        }
+    }//GEN-LAST:event_txtajusteFocusLost
+
+    private void txtValorCustoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtValorCustoFocusLost
+        String replace = null;
+        if (!txtajuste.getText().trim().equals("") && !txtValorCusto.getValue().equals(0)) {
+
+            if (txtajuste.getText().contains("%") || txtajuste.getText().contains(",")) {
+                replace = txtajuste.getText().replace("%", "").replace(",", ".").trim();
+
+                txtValorVenda.setValue(txtValorCusto.getValue()
+                        .multiply(new BigDecimal(replace))
+                        .divide(new BigDecimal(100)).add(txtValorCusto.getValue()));
+
+            } else {
+                txtValorVenda.setValue(txtValorCusto.getValue()
+                        .multiply(new BigDecimal(txtajuste.getText().trim()))
+                        .divide(new BigDecimal(100)).add(txtValorCusto.getValue()));
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Informe o valor de custo do produto", "Atenção", 0);
+        }
+    }//GEN-LAST:event_txtValorCustoFocusLost
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -295,15 +381,16 @@ public class TelaCadastroProduto extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel panel;
-    private javax.swing.JFormattedTextField txtAjuste;
     private javax.swing.JComboBox<String> txtCor;
     private javax.swing.JFormattedTextField txtEstoque;
+    private javax.swing.JComboBox<String> txtFornecedor;
     private javax.swing.JTextField txtObs;
     private javax.swing.JComboBox<String> txtTamanho;
     private javax.swing.JComboBox<String> txtUnt;
     private com.gdm.pantoja.app.util.JNumberFormatField txtValorCusto;
     private com.gdm.pantoja.app.util.JNumberFormatField txtValorPromocao;
     private com.gdm.pantoja.app.util.JNumberFormatField txtValorVenda;
+    private javax.swing.JFormattedTextField txtajuste;
     private javax.swing.JTextField txtcodigoBar;
     private javax.swing.JTextField txtnome;
     // End of variables declaration//GEN-END:variables

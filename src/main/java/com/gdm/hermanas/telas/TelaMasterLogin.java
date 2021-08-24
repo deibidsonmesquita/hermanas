@@ -55,6 +55,7 @@ public class TelaMasterLogin extends javax.swing.JFrame {
         setMaximizedBounds(new java.awt.Rectangle(0, 0, 480, 355));
         setMaximumSize(new java.awt.Dimension(780, 400));
         setMinimumSize(new java.awt.Dimension(480, 355));
+        setResizable(false);
         setSize(new java.awt.Dimension(480, 355));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
