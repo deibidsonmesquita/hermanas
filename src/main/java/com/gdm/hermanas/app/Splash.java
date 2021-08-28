@@ -1,5 +1,6 @@
 package com.gdm.hermanas.app;
 
+import com.gdm.hermanas.repositorio.UsuarioRepository;
 import com.gdm.hermanas.telas.TelaMasterLogin;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -53,7 +54,7 @@ public class Splash extends JWindow {
         setVisible(true);
 
         //-----inicio hibernate & update parcelas status------
-     
+        UsuarioRepository rpo = new UsuarioRepository();
         //-----fim update parcelas status------
 
         try {

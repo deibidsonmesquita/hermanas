@@ -1,14 +1,13 @@
 package com.gdm.hermanas.util;
 
 import com.gdm.hermanas.model.Cliente;
-
 import com.gdm.hermanas.model.Endereco;
 import com.gdm.hermanas.model.Estoque;
 import com.gdm.hermanas.model.Fornecedor;
 import com.gdm.hermanas.model.Item;
 import com.gdm.hermanas.model.Produto;
+import com.gdm.hermanas.model.Usuario;
 import com.gdm.hermanas.model.Venda;
-
 import java.util.logging.Level;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -43,6 +42,7 @@ public class HibernateUtil {
                     .addAnnotatedClass(Item.class)
                     .addAnnotatedClass(Venda.class)
                     .addAnnotatedClass(Fornecedor.class)
+                    .addAnnotatedClass(Usuario.class)
                     .buildMetadata()
                     .buildSessionFactory();
 

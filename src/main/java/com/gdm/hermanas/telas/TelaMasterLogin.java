@@ -2,6 +2,7 @@ package com.gdm.hermanas.telas;
 
 
 import com.gdm.hermanas.app.App;
+import com.gdm.hermanas.repositorio.UsuarioRepository;
 import javax.swing.JOptionPane;
 
 public class TelaMasterLogin extends javax.swing.JFrame {
@@ -21,10 +22,11 @@ public class TelaMasterLogin extends javax.swing.JFrame {
     }
 
     private void login() {
-        if (txtlogin.getText().equals("Hermanas") && new String(txtsenha.getPassword()).equals("hermanas123")) {
+        if (new UsuarioRepository().login(txtlogin.getText(), new String(txtsenha.getPassword()))) {
 
             if (App.privacity == 0) {
                 App main = new App();
+                main.nomeUser.setText(txtlogin.getText());
                 main.setVisible(true);
                 main.toFront();
                 dispose();

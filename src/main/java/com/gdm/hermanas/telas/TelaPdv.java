@@ -1,5 +1,6 @@
 package com.gdm.hermanas.telas;
 
+import com.gdm.hermanas.app.App;
 import com.gdm.hermanas.model.Item;
 import com.gdm.hermanas.model.Produto;
 import com.gdm.hermanas.model.Venda;
@@ -368,7 +369,7 @@ public class TelaPdv extends javax.swing.JInternalFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Venda venda = new Venda();
         venda.setDataVenda(LocalDate.now());
-        venda.setRepsonsavel("Deibidson");
+        venda.setRepsonsavel(App.nomeUser.getText());
         venda.setTotal(txtTotalVenda.getValue());
         venda.setItens(itensVenda);
         venda.setPgto(FormaPgto.DINHEIRO);

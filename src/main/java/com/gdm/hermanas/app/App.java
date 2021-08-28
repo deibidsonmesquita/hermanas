@@ -2,10 +2,10 @@ package com.gdm.hermanas.app;
 
 import com.gdm.hermanas.telas.TelaClientes;
 import com.gdm.hermanas.telas.TelaFornecedores;
-
 import com.gdm.hermanas.telas.TelaMasterLogin;
 import com.gdm.hermanas.telas.TelaPdv;
 import com.gdm.hermanas.telas.TelaProdutos;
+import com.gdm.hermanas.telas.TelaUsuarios;
 import java.awt.Dimension;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -48,6 +48,8 @@ public final class App extends javax.swing.JFrame {
         jSeparator6 = new javax.swing.JToolBar.Separator();
         jButton4 = new javax.swing.JButton();
         desktop = new javax.swing.JDesktopPane();
+        jLabel1 = new javax.swing.JLabel();
+        nomeUser = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -178,13 +180,26 @@ public final class App extends javax.swing.JFrame {
         );
         desktopLayout.setVerticalGroup(
             desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 499, Short.MAX_VALUE)
+            .addGap(0, 526, Short.MAX_VALUE)
         );
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel1.setText("Usuário:");
+
+        nomeUser.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        nomeUser.setForeground(new java.awt.Color(102, 102, 102));
+        nomeUser.setText("NomeUser");
 
         jMenu1.setText("Cadastros");
 
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/lock_security.png"))); // NOI18N
         jMenuItem1.setText("Usuários do Sistema");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
         jMenu1.add(jSeparator7);
 
@@ -218,8 +233,14 @@ public final class App extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(toolbar, javax.swing.GroupLayout.DEFAULT_SIZE, 1828, Short.MAX_VALUE)
+            .addComponent(toolbar, javax.swing.GroupLayout.DEFAULT_SIZE, 1230, Short.MAX_VALUE)
             .addComponent(desktop)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nomeUser)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,7 +248,11 @@ public final class App extends javax.swing.JFrame {
                 .addComponent(toolbar, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(desktop)
-                .addContainerGap())
+                .addGap(2, 2, 2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(nomeUser))
+                .addGap(3, 3, 3))
         );
 
         pack();
@@ -311,6 +336,11 @@ public final class App extends javax.swing.JFrame {
         fn.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        TelaUsuarios user = new TelaUsuarios(this, rootPaneCheckingEnabled);
+        user.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     public void hideFrames() {
         for (JInternalFrame tela : desktop.getAllFrames()) {
             tela.hide();
@@ -358,6 +388,7 @@ public final class App extends javax.swing.JFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -374,6 +405,7 @@ public final class App extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator7;
     private javax.swing.JPopupMenu.Separator jSeparator8;
     private javax.swing.JPopupMenu.Separator jSeparator9;
+    public static javax.swing.JLabel nomeUser;
     private javax.swing.JToolBar toolbar;
     // End of variables declaration//GEN-END:variables
 }
