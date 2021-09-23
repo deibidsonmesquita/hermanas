@@ -121,7 +121,7 @@ public class TelaCadastroCliente extends javax.swing.JDialog {
         txtcidade.setText("MIRANDA DO NORTE");
         txtcidade.setBorder(null);
 
-        txtcep.setText("65485-000");
+        txtcep.setText("65495-000");
         txtcep.setBorder(null);
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N

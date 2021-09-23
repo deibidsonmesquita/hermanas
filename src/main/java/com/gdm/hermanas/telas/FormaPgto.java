@@ -3,5 +3,5 @@ package com.gdm.hermanas.telas;
 
 
 public enum FormaPgto {
-    DINHEIRO, CARTAO
+    DINHEIRO, CARTAO, PRAZO
 }

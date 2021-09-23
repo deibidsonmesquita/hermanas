@@ -63,6 +63,8 @@ public class TelaMasterLogin extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(44, 75, 98));
 
+        txtlogin.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        txtlogin.setForeground(new java.awt.Color(51, 51, 51));
         txtlogin.setText("Hermanas");
         txtlogin.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
 
@@ -72,7 +74,6 @@ public class TelaMasterLogin extends javax.swing.JFrame {
 
         txtsenha.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         txtsenha.setForeground(new java.awt.Color(7, 26, 46));
-        txtsenha.setText("hermanas123");
         txtsenha.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 255, 255), 3, true));
         txtsenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

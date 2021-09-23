@@ -1,5 +1,6 @@
 package com.gdm.hermanas.app;
 
+import com.gdm.hermanas.model.Usuario;
 import com.gdm.hermanas.repositorio.UsuarioRepository;
 import com.gdm.hermanas.telas.TelaMasterLogin;
 import java.awt.BorderLayout;
@@ -53,9 +54,12 @@ public class Splash extends JWindow {
 
         setVisible(true);
 
-        //-----inicio hibernate & update parcelas status------
+        //-----inicio hibernate & update users------
         UsuarioRepository rpo = new UsuarioRepository();
-        //-----fim update parcelas status------
+        if(rpo.lista(Usuario.class).isEmpty()){
+            rpo.saveOrUpdate(new Usuario("Hermanas", "123", true));
+        }
+        //-----fim update ------
 
         try {
             Thread.sleep(duration);

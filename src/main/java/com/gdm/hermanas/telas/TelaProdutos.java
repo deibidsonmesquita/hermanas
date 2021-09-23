@@ -1,46 +1,47 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.gdm.hermanas.telas;
 
 import com.gdm.hermanas.model.Produto;
 import com.gdm.hermanas.repositorio.GenericDao;
 import com.gdm.hermanas.repositorio.ProdutoRepository;
 import com.gdm.hermanas.util.ProcessRetorno;
+import java.text.NumberFormat;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
-public class TelaProdutos extends javax.swing.JInternalFrame implements ProcessRetorno{
+public class TelaProdutos extends javax.swing.JInternalFrame implements ProcessRetorno {
 
     private final GenericDao repository;
-    
+    private final NumberFormat formt = NumberFormat.getCurrencyInstance();
+
     public TelaProdutos() {
         initComponents();
-        
+
         this.repository = new ProdutoRepository();
         listagemProdutos();
     }
 
     private void listagemProdutos() {
+        
 
         List<Produto> lista = repository.lista(Produto.class);
+        
+       
 
         DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
         modelo.setNumRows(0);
 
-        Object[] row = new Object[7];
+        Object[] row = new Object[8];
         lista.forEach(i -> {
 
             row[0] = i.getId();
             row[1] = i.getNome();
-            row[2] = i.getValorVenda();
+            row[2] = formt.format(i.getValorVenda());
             row[3] = i.getEstoque().getInicial();
-            row[4] = i.getValorPromo();
+            row[4] = formt.format(i.getValorPromo());
             row[5] = i.getCor();
             row[6] = i.getTamanho();
+            row[7] = i.getMargen() + "%";
 
             modelo.addRow(row);
         });
@@ -50,7 +51,7 @@ public class TelaProdutos extends javax.swing.JInternalFrame implements ProcessR
             modelo.addRow(row);
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -64,6 +65,7 @@ public class TelaProdutos extends javax.swing.JInternalFrame implements ProcessR
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
         setMaximizable(true);
+        setTitle("Produtos");
 
         jButton1.setBackground(new java.awt.Color(0, 153, 255));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -77,15 +79,23 @@ public class TelaProdutos extends javax.swing.JInternalFrame implements ProcessR
 
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "CODIGO", "NOME", "PREÇO VENDA", "ESTOQUE", "PROMOÇÃO", "COR", "TAMANHO"
+                "CODIGO", "NOME", "PREÇO VENDA", "ESTOQUE", "PROMOÇÃO", "COR", "TAMANHO", "MARGEM (%)"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tabela.setGridColor(new java.awt.Color(239, 248, 252));
         tabela.setRowHeight(32);
         jScrollPane1.setViewportView(tabela);
@@ -93,8 +103,12 @@ public class TelaProdutos extends javax.swing.JInternalFrame implements ProcessR
             tabela.getColumnModel().getColumn(0).setMinWidth(100);
             tabela.getColumnModel().getColumn(0).setMaxWidth(110);
             tabela.getColumnModel().getColumn(1).setMinWidth(200);
+            tabela.getColumnModel().getColumn(3).setMinWidth(80);
+            tabela.getColumnModel().getColumn(3).setMaxWidth(85);
             tabela.getColumnModel().getColumn(6).setMinWidth(90);
             tabela.getColumnModel().getColumn(6).setMaxWidth(95);
+            tabela.getColumnModel().getColumn(7).setMinWidth(90);
+            tabela.getColumnModel().getColumn(7).setMaxWidth(95);
         }
 
         busca.setBackground(new java.awt.Color(255, 255, 232));

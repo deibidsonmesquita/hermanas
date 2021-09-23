@@ -29,6 +29,7 @@ public class Produto implements Serializable {
     private String cor;
     private String obs;
     private String tamanho;
+    private double margen;
     
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @Fetch(FetchMode.JOIN)

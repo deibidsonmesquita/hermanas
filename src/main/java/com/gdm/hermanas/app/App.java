@@ -3,7 +3,7 @@ package com.gdm.hermanas.app;
 import com.gdm.hermanas.telas.TelaClientes;
 import com.gdm.hermanas.telas.TelaFornecedores;
 import com.gdm.hermanas.telas.TelaMasterLogin;
-import com.gdm.hermanas.telas.TelaPdv;
+import com.gdm.hermanas.telas.TelaPdvMain;
 import com.gdm.hermanas.telas.TelaProdutos;
 import com.gdm.hermanas.telas.TelaUsuarios;
 import java.awt.Dimension;
@@ -20,7 +20,7 @@ public final class App extends javax.swing.JFrame {
     private TelaProdutos telaProdutos;
     public static int privacity = 0;
 
-    private TelaPdv telaPdv;
+    private TelaPdvMain telaPdv;
 
     public App() {
         initComponents();
@@ -215,11 +215,21 @@ public final class App extends javax.swing.JFrame {
 
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/consumer_1.png"))); // NOI18N
         jMenuItem3.setText("Meus Clientes");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem3);
         jMenu1.add(jSeparator9);
 
         jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/produto.png"))); // NOI18N
         jMenuItem4.setText("Meus Produtos");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem4);
 
         jMenuBar1.add(jMenu1);
@@ -317,7 +327,7 @@ public final class App extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         if (telaPdv == null) {
-            telaPdv = new TelaPdv();
+            telaPdv = new TelaPdvMain();
             desktop.add(telaPdv);
         }
         
@@ -340,6 +350,21 @@ public final class App extends javax.swing.JFrame {
         TelaUsuarios user = new TelaUsuarios(this, rootPaneCheckingEnabled);
         user.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+         showTelaProdutos();
+         
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+         if (telaClientes == null) {
+            telaClientes = new TelaClientes();
+            desktop.add(telaClientes);
+        }
+        telaClientes.setLocation(40, 40);
+        telaClientes.setVisible(true);
+        telaClientes.toFront();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     public void hideFrames() {
         for (JInternalFrame tela : desktop.getAllFrames()) {

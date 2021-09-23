@@ -1,4 +1,5 @@
-package com.gdm.pantoja.app.util;
+
+package com.gdm.hermanas.util;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -13,11 +14,6 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 
-/**
- * Campo para a inser��o de n�meros com base em um formato.
- *
- * @author Dyorgio da Silva Nascimento
- */
 public class JNumberFormatField extends JTextField {
 
     private static final long serialVersionUID = -7506506392528621022L;
@@ -34,7 +30,7 @@ public class JNumberFormatField extends JTextField {
     }
 
     public JNumberFormatField(NumberFormat format) {// define o formato do  
-        // n�mero  
+
         numberFormat = format;// alinhamento horizontal para o texto  
         setHorizontalAlignment(RIGHT);// documento respons�vel pela formata��o  
         // do campo  
@@ -149,6 +145,8 @@ public class JNumberFormatField extends JTextField {
     /**
      * *
      * Recupera o limite do campo.** @return
+     *
+     * @return
      */
     public int getLimit() {
         return limit;
@@ -158,7 +156,7 @@ public class JNumberFormatField extends JTextField {
      * *
      * Define o limite do campo, limit < 0 para deixar livre (default) Ignora os
      * pontos e virgulas do formato, conta* somente com os n�meros** @param
-     * limit
+     * limit @param limit
      */
     public void setLimit(int limit) {
         this.limit = limit;
