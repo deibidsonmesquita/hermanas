@@ -317,9 +317,16 @@ public class TelaCadastroProduto extends javax.swing.JDialog {
                 produto.setUnd(txtUnt.getSelectedItem().toString());
                 produto.setTamanho(txtTamanho.getSelectedItem().toString());
                 produto.setValorVenda(txtValorVenda.getValue());
-                produto.setValorPromo(txtValorPromocao.getValue());
+                
+                if(txtValorPromocao.getValue().intValue() > 0){
+                    produto.setValorPromo(txtValorPromocao.getValue());
+                }else{
+                   produto.setValorPromo(txtValorVenda.getValue());
+                }
+                
+                
                 produto.setValorCusto(txtValorCusto.getValue());
-                produto.setMargen(Double.parseDouble(txtajuste.getText()));
+                produto.setMargen(Double.parseDouble(txtajuste.getText().replace(",", ".")));
 
                 Estoque eq = new Estoque();
                 eq.setInicial(Integer.parseInt(String.valueOf(txtEstoque.getValue())));
@@ -349,7 +356,7 @@ public class TelaCadastroProduto extends javax.swing.JDialog {
             produto.setValorVenda(txtValorVenda.getValue());
             produto.setValorPromo(txtValorPromocao.getValue());
             produto.setValorCusto(txtValorCusto.getValue());
-            produto.setMargen(Double.parseDouble(txtajuste.getText()));
+            produto.setMargen(Double.parseDouble(txtajuste.getText().replace(",", ".")));
 
             Estoque eq = new Estoque();
             eq.setInicial(Integer.parseInt(String.valueOf(txtEstoque.getValue())));

@@ -103,6 +103,7 @@ public class TelaPdvMain extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
+        opcPromocional = new javax.swing.JCheckBox();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -112,7 +113,7 @@ public class TelaPdvMain extends javax.swing.JInternalFrame {
         setClosable(true);
         setTitle("PDV");
 
-        jPanel3.setBackground(new java.awt.Color(201, 226, 242));
+        jPanel3.setBackground(new java.awt.Color(191, 216, 232));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
@@ -137,6 +138,7 @@ public class TelaPdvMain extends javax.swing.JInternalFrame {
         jLabel3.setForeground(new java.awt.Color(102, 102, 102));
         jLabel3.setText("Preço Unitário:");
 
+        txtPrecoUnt.setForeground(new java.awt.Color(0, 51, 0));
         txtPrecoUnt.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
 
         tabMaster.setForeground(new java.awt.Color(102, 102, 102));
@@ -261,6 +263,11 @@ public class TelaPdvMain extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        opcPromocional.setBackground(new java.awt.Color(191, 216, 232));
+        opcPromocional.setForeground(new java.awt.Color(51, 51, 51));
+        opcPromocional.setText("Valor Promocional");
+        opcPromocional.setToolTipText("Cuidado: Utiliza apenas o preço promocional cadastrado");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -279,7 +286,8 @@ public class TelaPdvMain extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel4)
                                     .addComponent(txtTotalVenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtPrecoUnt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtQtde, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)))
+                                    .addComponent(txtQtde, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
+                                    .addComponent(opcPromocional)))
                             .addComponent(txtCodigoBar)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -287,9 +295,9 @@ public class TelaPdvMain extends javax.swing.JInternalFrame {
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(18, 18, 18)
                         .addComponent(tabMaster, javax.swing.GroupLayout.PREFERRED_SIZE, 634, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -325,7 +333,8 @@ public class TelaPdvMain extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtTotalVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(opcPromocional))
                             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -395,7 +404,12 @@ public class TelaPdvMain extends javax.swing.JInternalFrame {
 
         if (produto != null) {
             txtDesc.setText(produto.getNome());
-            txtPrecoUnt.setValue(produto.getValorVenda());
+           
+            if(opcPromocional.isSelected()){
+                 txtPrecoUnt.setValue(produto.getValorPromo());
+            }else{
+                txtPrecoUnt.setValue(produto.getValorVenda());
+            }
 
             Item item = new Item((Integer) txtQtde.getValue());
             item.setProduto(produto);
@@ -487,6 +501,7 @@ public class TelaPdvMain extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JCheckBox opcPromocional;
     private javax.swing.JTabbedPane tabMaster;
     private javax.swing.JTable tabelaCupom;
     public javax.swing.JTextField txtCodigoBar;

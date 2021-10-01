@@ -3,7 +3,6 @@ package com.gdm.hermanas.telas;
 import com.gdm.hermanas.model.Cliente;
 import com.gdm.hermanas.repositorio.ClienteRepository;
 import com.gdm.hermanas.repositorio.GenericDao;
-
 import com.gdm.hermanas.util.ProcessRetorno;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -75,7 +74,7 @@ public class TelaClientes extends javax.swing.JInternalFrame implements ProcessR
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Codigo", "Nome", "Telefone 1", "Telefone 2", "CPF", "Sexo", "Aniversário"
+                "Codigo", "Nome", "Telefone 1", "Telefone 2", "CPF", "Sexo", "Nascimento"
             }
         ) {
             boolean[] canEdit = new boolean [] {

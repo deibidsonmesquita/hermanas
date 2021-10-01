@@ -83,7 +83,7 @@
     <Container class="javax.swing.JPanel" name="jPanel3">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="f2" green="e2" red="c9" type="rgb"/>
+          <Color blue="e8" green="d8" red="bf" type="rgb"/>
         </Property>
       </Properties>
 
@@ -105,6 +105,7 @@
                                       <Component id="txtTotalVenda" alignment="0" max="32767" attributes="0"/>
                                       <Component id="txtPrecoUnt" alignment="0" max="32767" attributes="0"/>
                                       <Component id="txtQtde" alignment="0" pref="207" max="32767" attributes="0"/>
+                                      <Component id="opcPromocional" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Component id="txtCodigoBar" max="32767" attributes="0"/>
@@ -114,9 +115,9 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jButton2" min="-2" pref="151" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jButton1" min="-2" pref="140" max="-2" attributes="0"/>
+                                          <Component id="jButton1" min="-2" pref="146" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jButton3" min="-2" pref="147" max="-2" attributes="0"/>
+                                          <Component id="jButton3" min="-2" pref="141" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -161,7 +162,8 @@
                                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="txtTotalVenda" min="-2" pref="50" max="-2" attributes="0"/>
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="opcPromocional" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jPanel4" max="32767" attributes="0"/>
                           </Group>
@@ -250,6 +252,9 @@
         </Component>
         <Component class="com.gdm.hermanas.util.JNumberFormatField" name="txtPrecoUnt">
           <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="33" red="0" type="rgb"/>
+            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="18" style="0"/>
             </Property>
@@ -498,6 +503,18 @@
             </Component>
           </SubComponents>
         </Container>
+        <Component class="javax.swing.JCheckBox" name="opcPromocional">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="e8" green="d8" red="bf" type="rgb"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="33" green="33" red="33" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Valor Promocional"/>
+            <Property name="toolTipText" type="java.lang.String" value="Cuidado: Utiliza apenas o pre&#xe7;o promocional cadastrado"/>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>

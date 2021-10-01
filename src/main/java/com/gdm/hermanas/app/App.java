@@ -1,5 +1,7 @@
 package com.gdm.hermanas.app;
 
+import com.gdm.hermanas.model.Cliente;
+import com.gdm.hermanas.repositorio.ClienteRepository;
 import com.gdm.hermanas.telas.TelaClientes;
 import com.gdm.hermanas.telas.TelaFornecedores;
 import com.gdm.hermanas.telas.TelaMasterLogin;
@@ -8,6 +10,8 @@ import com.gdm.hermanas.telas.TelaProdutos;
 import com.gdm.hermanas.telas.TelaUsuarios;
 import java.awt.Dimension;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JInternalFrame;
@@ -24,9 +28,9 @@ public final class App extends javax.swing.JFrame {
 
     public App() {
         initComponents();
-      
-        //showTelaProdutos();
+        setExtendedState(MAXIMIZED_BOTH);
 
+        showAniversariantesDoDia();
     }
 
     @SuppressWarnings("unchecked")
@@ -48,6 +52,7 @@ public final class App extends javax.swing.JFrame {
         jSeparator6 = new javax.swing.JToolBar.Separator();
         jButton4 = new javax.swing.JButton();
         desktop = new javax.swing.JDesktopPane();
+        txtAniversariantesAlert = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         nomeUser = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -63,7 +68,6 @@ public final class App extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Hermanas  v1.0");
-        setExtendedState(MAXIMIZED_BOTH);
 
         toolbar.setBackground(new java.awt.Color(0, 0, 0));
         toolbar.setFloatable(false);
@@ -172,15 +176,27 @@ public final class App extends javax.swing.JFrame {
 
         desktop.setBackground(new java.awt.Color(217, 233, 249));
 
+        txtAniversariantesAlert.setForeground(new java.awt.Color(145, 143, 143));
+        txtAniversariantesAlert.setText("-");
+        txtAniversariantesAlert.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        desktop.setLayer(txtAniversariantesAlert, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout desktopLayout = new javax.swing.GroupLayout(desktop);
         desktop.setLayout(desktopLayout);
         desktopLayout.setHorizontalGroup(
             desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, desktopLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtAniversariantesAlert)
+                .addContainerGap())
         );
         desktopLayout.setVerticalGroup(
             desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 526, Short.MAX_VALUE)
+            .addGroup(desktopLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtAniversariantesAlert)
+                .addContainerGap(504, Short.MAX_VALUE))
         );
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
@@ -284,6 +300,25 @@ public final class App extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void showAniversariantesDoDia() {
+        List<Cliente> lista = new ClienteRepository().lista(Cliente.class);
+
+        lista.forEach(c -> {
+            if (!c.getNascimento().equals("  /  /    ") && !c.getNascimento().isBlank()) {
+                var dia = c.getNascimento().split("/")[0];
+                var mes = c.getNascimento().split("/")[1];
+                if (dia.equals(LocalDate.now().getDayOfMonth()) && mes.equals(LocalDate.now().getMonthValue())) {
+                    lista.add(c);
+                }
+            }
+        });
+
+        if (!lista.isEmpty()) {
+            txtAniversariantesAlert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/aniversario.png")));
+            txtAniversariantesAlert.setText("Aniversáriante(s) do dia");
+        }
+    }
+
     public void showTelaProdutos() {
         if (telaProdutos == null) {
             telaProdutos = new TelaProdutos();
@@ -330,7 +365,7 @@ public final class App extends javax.swing.JFrame {
             telaPdv = new TelaPdvMain();
             desktop.add(telaPdv);
         }
-        
+
         telaPdv.setVisible(true);
         telaPdv.toFront();
 
@@ -342,7 +377,7 @@ public final class App extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         TelaFornecedores fn = new TelaFornecedores(this, rootPaneCheckingEnabled);
-       
+
         fn.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
@@ -352,12 +387,12 @@ public final class App extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-         showTelaProdutos();
-         
+        showTelaProdutos();
+
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-         if (telaClientes == null) {
+        if (telaClientes == null) {
             telaClientes = new TelaClientes();
             desktop.add(telaClientes);
         }
@@ -432,5 +467,6 @@ public final class App extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator9;
     public static javax.swing.JLabel nomeUser;
     private javax.swing.JToolBar toolbar;
+    private javax.swing.JLabel txtAniversariantesAlert;
     // End of variables declaration//GEN-END:variables
 }
