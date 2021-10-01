@@ -98,6 +98,11 @@ public class TelaProdutos extends javax.swing.JInternalFrame implements ProcessR
         });
         tabela.setGridColor(new java.awt.Color(239, 248, 252));
         tabela.setRowHeight(32);
+        tabela.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabela);
         if (tabela.getColumnModel().getColumnCount() > 0) {
             tabela.getColumnModel().getColumn(0).setMinWidth(100);
@@ -163,6 +168,15 @@ public class TelaProdutos extends javax.swing.JInternalFrame implements ProcessR
         tabela.setRowSorter(tr);
         tr.setRowFilter(javax.swing.RowFilter.regexFilter(busca.getText().toUpperCase()));
     }//GEN-LAST:event_buscaKeyTyped
+
+    private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
+        if(evt.getClickCount() > 1){
+            long id = (long) tabela.getValueAt(tabela.getSelectedRow(), 0);
+            
+            TelaCadastroProduto tc = new TelaCadastroProduto(null, closable, this, id);
+            tc.setVisible(true);
+        }
+    }//GEN-LAST:event_tabelaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

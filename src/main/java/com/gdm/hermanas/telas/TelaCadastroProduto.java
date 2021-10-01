@@ -16,11 +16,22 @@ import javax.swing.JOptionPane;
 public class TelaCadastroProduto extends javax.swing.JDialog {
 
     private final ProcessRetorno processRetorno;
-   
+    private long idProduto = 0L;
 
     public TelaCadastroProduto(java.awt.Frame parent, boolean modal, TelaProdutos tela) {
         super(parent, modal);
         initComponents();
+
+        this.processRetorno = tela;
+        listaNomesFornecedores();
+    }
+
+    public TelaCadastroProduto(java.awt.Frame parent, boolean modal, TelaProdutos tela, long idProduto) {
+        super(parent, modal);
+        initComponents();
+
+        this.idProduto = idProduto;
+        preparaUpdateData(idProduto);
 
         this.processRetorno = tela;
         listaNomesFornecedores();
@@ -294,13 +305,44 @@ public class TelaCadastroProduto extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (!txtEstoque.getText().isEmpty() && !txtnome.getText().isEmpty()) {
-            Produto produto = new Produto();
+        if (idProduto == 0L) {
+            if (!txtEstoque.getText().isEmpty() && !txtnome.getText().isEmpty()) {
+                Produto produto = new Produto();
 
+                produto.setNome(txtnome.getText().toUpperCase());
+                produto.setCodbar(txtcodigoBar.getText());
+                produto.setObs(txtObs.getText());
+                produto.setAjuste(Double.valueOf(txtajuste.getText()));
+                produto.setCor(txtCor.getSelectedItem().toString());
+                produto.setUnd(txtUnt.getSelectedItem().toString());
+                produto.setTamanho(txtTamanho.getSelectedItem().toString());
+                produto.setValorVenda(txtValorVenda.getValue());
+                produto.setValorPromo(txtValorPromocao.getValue());
+                produto.setValorCusto(txtValorCusto.getValue());
+                produto.setMargen(Double.parseDouble(txtajuste.getText()));
+
+                Estoque eq = new Estoque();
+                eq.setInicial(Integer.parseInt(String.valueOf(txtEstoque.getValue())));
+                eq.setAtual(eq.getInicial());
+                eq.setMinimo(1);
+
+                produto.setEstoque(eq);
+
+                new ProdutoRepository().saveOrUpdate(produto);
+
+                JOptionPane.showMessageDialog(panel, "Cadastro efetuado com sucesso", "Confirmação", 1);
+                processRetorno.update();
+
+            } else {
+                JOptionPane.showMessageDialog(panel, "Preencha todos os campos", "Atenção", 0);
+            }
+        } else {
+
+            Produto produto = new ProdutoRepository().find(Produto.class, idProduto);
             produto.setNome(txtnome.getText().toUpperCase());
             produto.setCodbar(txtcodigoBar.getText());
             produto.setObs(txtObs.getText());
-            produto.setAjuste(Double.valueOf(txtajuste.getText()));
+            produto.setAjuste(Double.valueOf(txtajuste.getText().replace(",", ".")));
             produto.setCor(txtCor.getSelectedItem().toString());
             produto.setUnd(txtUnt.getSelectedItem().toString());
             produto.setTamanho(txtTamanho.getSelectedItem().toString());
@@ -315,14 +357,10 @@ public class TelaCadastroProduto extends javax.swing.JDialog {
             eq.setMinimo(1);
 
             produto.setEstoque(eq);
-
             new ProdutoRepository().saveOrUpdate(produto);
-
-            JOptionPane.showMessageDialog(panel, "Cadastro efetuado com sucesso", "Confirmação", 1);
+            JOptionPane.showMessageDialog(panel, "Atualização efetuada com sucesso", "Atualizado", 1);
             processRetorno.update();
-
-        } else {
-            JOptionPane.showMessageDialog(panel, "Preencha todos os campos", "Atenção", 0);
+            dispose();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -361,6 +399,21 @@ public class TelaCadastroProduto extends javax.swing.JDialog {
         BigDecimal result = margen.multiply(new BigDecimal(100)).setScale(2, RoundingMode.HALF_UP);
 
         return result.doubleValue();
+    }
+    
+    
+    private void preparaUpdateData(long id){
+        Produto produto = new ProdutoRepository().find(Produto.class, id);
+        txtnome.setText(produto.getNome().toUpperCase());
+        txtObs.setText(produto.getObs().toUpperCase());
+        txtValorCusto.setValue(produto.getValorCusto());
+        txtValorPromocao.setValue(produto.getValorPromo());
+        txtajuste.setValue(produto.getAjuste());
+        txtcodigoBar.setText(produto.getCodbar());
+        txtValorVenda.setValue(produto.getValorVenda());
+        txtEstoque.setValue(produto.getEstoque().getInicial());
+        txtCor.setSelectedItem(produto.getCor());
+        txtTamanho.setSelectedItem(produto.getTamanho());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
