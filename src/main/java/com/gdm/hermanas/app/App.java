@@ -13,6 +13,7 @@ import com.gdm.hermanas.telas.TelaUsuarios;
 import java.awt.Dimension;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,7 +27,7 @@ public final class App extends javax.swing.JFrame {
     private TelaClientes telaClientes;
     private TelaProdutos telaProdutos;
     public static int privacity = 0;
-    private List<Cliente> lista;
+    private List<Cliente> lista = new ArrayList<>();
 
     private TelaPdvMain telaPdv;
 
@@ -310,13 +311,14 @@ public final class App extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void showAniversariantesDoDia() {
-        lista = new ClienteRepository().lista(Cliente.class);
+       List<Cliente> listagem = new ClienteRepository().lista(Cliente.class);
 
-        lista.forEach(c -> {
+        listagem.forEach(c -> {
             if (!c.getNascimento().equals("  /  /    ") && !c.getNascimento().isBlank()) {
-                var dia = c.getNascimento().split("/")[0];
-                var mes = c.getNascimento().split("/")[1];
-                if (dia.equals(LocalDate.now().getDayOfMonth()) && mes.equals(LocalDate.now().getMonthValue())) {
+                int dia =  Integer.parseInt(c.getNascimento().split("/")[0]);
+                int mes = Integer.parseInt(c.getNascimento().split("/")[1]);
+                
+                if (dia == LocalDate.now().getDayOfMonth() && mes == LocalDate.now().getMonthValue()) {
                     lista.add(c);
                 }
             }

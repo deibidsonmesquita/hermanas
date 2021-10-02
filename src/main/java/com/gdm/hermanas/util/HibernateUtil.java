@@ -1,5 +1,6 @@
 package com.gdm.hermanas.util;
 
+import com.gdm.hermanas.model.Caixa;
 import com.gdm.hermanas.model.Cliente;
 import com.gdm.hermanas.model.Endereco;
 import com.gdm.hermanas.model.Estoque;
@@ -43,6 +44,7 @@ public class HibernateUtil {
                     .addAnnotatedClass(Venda.class)
                     .addAnnotatedClass(Fornecedor.class)
                     .addAnnotatedClass(Usuario.class)
+                    .addAnnotatedClass(Caixa.class)
                     .buildMetadata()
                     .buildSessionFactory();
 

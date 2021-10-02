@@ -5,13 +5,18 @@
 package com.gdm.hermanas.telas;
 
 import com.gdm.hermanas.app.App;
+import com.gdm.hermanas.model.Caixa;
 import com.gdm.hermanas.model.Item;
 import com.gdm.hermanas.model.Produto;
 import com.gdm.hermanas.model.Venda;
+import com.gdm.hermanas.repositorio.CaixaRepository;
 import com.gdm.hermanas.repositorio.ProdutoRepository;
 import com.gdm.hermanas.repositorio.VendaRepository;
+import com.gdm.hermanas.util.ProcessRetorno;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -22,40 +27,36 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author deibi
  */
-public class TelaPdvMain extends javax.swing.JInternalFrame {
-
+public class TelaPdvMain extends javax.swing.JInternalFrame implements ProcessRetorno{
+    
     private final List<Item> itensVenda = new ArrayList<>();
-
+    
     public TelaPdvMain() {
         initComponents();
-
+        
         txtCodigoBar.requestFocus();
         tabMaster.setSelectedIndex(1);
     }
-
+    
     private void addItenVenda(Item item) {
         
-        var qtde = 0;
         Optional<Item> itm = itensVenda.stream().filter(i -> i.getProduto().getId() == item.getProduto().getId()).findFirst();
         
-        if(itm.isPresent()){
+        if (itm.isPresent()) {
             itm.get().setQtde(itm.get().getQtde() + item.getQtde());
             itm.get().setSubtotal(itm.get().getSubtotal().add(item.getSubtotal()));
             
             itensVenda.removeIf(it -> it.getProduto().getId() == item.getProduto().getId()
                     || it.getProduto().getCodbar().equals(item.getProduto().getCodbar()));
-
+            
             itensVenda.add(itm.get());
-        }else{
-             itensVenda.add(item);
+        } else {
+            itensVenda.add(item);
         }
-        
-
-        
         
         listaItensVenda();
     }
-
+    
     private void resetPdv() {
         itensVenda.clear();
         listaItensVenda();
@@ -63,21 +64,21 @@ public class TelaPdvMain extends javax.swing.JInternalFrame {
         txtPrecoUnt.setValue(BigDecimal.ZERO);
         txtQtde.setValue(1);
         txtCodigoBar.setText("");
-
+        
         txtDesc.setText("CAIXA LIVRE");
         txtCodigoBar.requestFocus();
-
+        
     }
-
+    
     private void listaItensVenda() {
-
+        
         DefaultTableModel modelo = (DefaultTableModel) tabelaCupom.getModel();
         modelo.setNumRows(0);
-
+        
         Object[] row = new Object[5];
-
+        
         itensVenda.forEach(it -> {
-
+            
             row[0] = it.getProduto().getId();
             row[1] = it.getProduto().getNome();
             row[2] = it.getQtde();
@@ -89,16 +90,16 @@ public class TelaPdvMain extends javax.swing.JInternalFrame {
                 row[4] = it.getProduto().getValorVenda().multiply(new BigDecimal(it.getQtde()));
             }
             modelo.addRow(row);
-
+            
         });
-
+        
         txtTotalVenda.setValue(
                 itensVenda
                         .stream()
                         .map(it -> it.getSubtotal())
                         .reduce(BigDecimal.ZERO, BigDecimal::add));
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -254,6 +255,11 @@ public class TelaPdvMain extends javax.swing.JInternalFrame {
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/lock.png"))); // NOI18N
         jButton3.setText("Fechar Caixa");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         btnDeleteItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-lixo-24.png"))); // NOI18N
         btnDeleteItem.setText("Remover Produto");
@@ -432,17 +438,17 @@ public class TelaPdvMain extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tabelaCupomMouseClicked
 
     private void txtCodigoBarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoBarActionPerformed
-
+        
         long codigo = Long.parseLong(txtCodigoBar.getText());
-
+        
         Produto produto = new ProdutoRepository().find(Produto.class, codigo);
-
+        
         if (produto != null) {
             txtDesc.setText(produto.getNome());
-
+            
             Item item = new Item((Integer) txtQtde.getValue());
             item.setProduto(produto);
-
+            
             if (opcPromocional.isSelected()) {
                 txtPrecoUnt.setValue(produto.getValorPromo());
                 item.setSubtotal(produto.getValorPromo().multiply(new BigDecimal(item.getQtde())));
@@ -450,13 +456,13 @@ public class TelaPdvMain extends javax.swing.JInternalFrame {
                 txtPrecoUnt.setValue(produto.getValorVenda());
                 item.setSubtotal(produto.getValorVenda().multiply(new BigDecimal(item.getQtde())));
             }
-
+            
             item.setVenda(null);
-
+            
             addItenVenda(item);
             txtCodigoBar.setText("");
             txtCodigoBar.requestFocus();
-
+            
         } else {
             JOptionPane.showMessageDialog(rootPane, "Produto não encontrado.", "Código inexistente", 0);
             txtCodigoBar.setText("");
@@ -482,31 +488,41 @@ public class TelaPdvMain extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Venda venda = new Venda();
-        venda.setDataVenda(LocalDate.now());
-        venda.setRepsonsavel(App.nomeUser.getText());
-        venda.setTotal(txtTotalVenda.getValue());
-        venda.setItens(itensVenda);
-        venda.setPgto(FormaPgto.DINHEIRO);
-
-        new VendaRepository().saveOrUpdate(venda);
-        JOptionPane.showMessageDialog(rootPane, "Venda efetuada com sucesso.", " Venda confirmada", 1);
-
-        resetPdv();
+        if (txtTotalVenda.getValue().intValue() > 0) {
+            Venda venda = new Venda();
+            venda.setDataVenda(LocalDate.now());
+            venda.setRepsonsavel(App.nomeUser.getText());
+            venda.setTotal(txtTotalVenda.getValue());
+            venda.setItens(itensVenda);
+          
+            
+            TelaFinalizaVenda fn = new TelaFinalizaVenda(null, closable, venda, this);
+            fn.setVisible(true);
+            
+            resetPdv();
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Venda não concluida.", " Venda com valor 0", 0);
+            
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        Venda venda = new Venda();
-        venda.setDataVenda(LocalDate.now());
-        venda.setRepsonsavel(App.nomeUser.getText());
-        venda.setTotal(txtTotalVenda.getValue());
-        venda.setItens(itensVenda);
-        venda.setPgto(FormaPgto.DINHEIRO);
-
-        new VendaRepository().saveOrUpdate(venda);
-        JOptionPane.showMessageDialog(rootPane, "Venda efetuada com sucesso.", " Venda confirmada", 1);
-
-        resetPdv();
+        if (txtTotalVenda.getValue().intValue() > 0) {
+            Venda venda = new Venda();
+            venda.setDataVenda(LocalDate.now());
+            venda.setRepsonsavel(App.nomeUser.getText());
+            venda.setTotal(txtTotalVenda.getValue());
+            venda.setItens(itensVenda);
+          
+            
+            TelaFinalizaVenda fn = new TelaFinalizaVenda(null, closable, venda, this);
+            fn.setVisible(true);
+            
+            resetPdv();
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Venda não concluida.", " Venda com valor 0", 0);
+            
+        }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -518,6 +534,15 @@ public class TelaPdvMain extends javax.swing.JInternalFrame {
         TelaVendas tv = new TelaVendas(null, closable);
         tv.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        int opc = JOptionPane.showConfirmDialog(rootPane, "Deseja realmente fechar o caixa de hoje?", "Confirme", JOptionPane.OK_CANCEL_OPTION);
+        if (opc == 0) {
+            BigDecimal total = new VendaRepository().total(LocalDate.now());
+            new CaixaRepository().saveOrUpdate(new Caixa(LocalDateTime.now(), total, App.nomeUser.getText()));
+            JOptionPane.showMessageDialog(rootPane, "Sucesso caixa encerrado\nData " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + "  Total R$" + total, "Confirmado", JOptionPane.OK_CANCEL_OPTION);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -554,4 +579,14 @@ public class TelaPdvMain extends javax.swing.JInternalFrame {
     private javax.swing.JSpinner txtQtde;
     private com.gdm.hermanas.util.JNumberFormatField txtTotalVenda;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void retorno(Object obj) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void update() {
+        resetPdv();
+    }
 }
