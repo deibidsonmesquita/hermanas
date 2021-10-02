@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,22 +24,39 @@ import javax.swing.table.DefaultTableModel;
  */
 public class TelaPdvMain extends javax.swing.JInternalFrame {
 
-     private final List<Item> itensVenda = new ArrayList<>();
-     
+    private final List<Item> itensVenda = new ArrayList<>();
+
     public TelaPdvMain() {
         initComponents();
-        
-         txtCodigoBar.requestFocus();
+
+        txtCodigoBar.requestFocus();
         tabMaster.setSelectedIndex(1);
     }
 
-   
     private void addItenVenda(Item item) {
-        itensVenda.add(item);
+        
+        var qtde = 0;
+        Optional<Item> itm = itensVenda.stream().filter(i -> i.getProduto().getId() == item.getProduto().getId()).findFirst();
+        
+        if(itm.isPresent()){
+            itm.get().setQtde(itm.get().getQtde() + item.getQtde());
+            itm.get().setSubtotal(itm.get().getSubtotal().add(item.getSubtotal()));
+            
+            itensVenda.removeIf(it -> it.getProduto().getId() == item.getProduto().getId()
+                    || it.getProduto().getCodbar().equals(item.getProduto().getCodbar()));
+
+            itensVenda.add(itm.get());
+        }else{
+             itensVenda.add(item);
+        }
+        
+
+        
+        
         listaItensVenda();
     }
-    
-     private void resetPdv() {
+
+    private void resetPdv() {
         itensVenda.clear();
         listaItensVenda();
         txtTotalVenda.setValue(BigDecimal.ZERO);
@@ -63,8 +81,13 @@ public class TelaPdvMain extends javax.swing.JInternalFrame {
             row[0] = it.getProduto().getId();
             row[1] = it.getProduto().getNome();
             row[2] = it.getQtde();
-            row[3] = it.getProduto().getValorVenda();
-            row[4] = it.getProduto().getValorVenda().multiply(new BigDecimal(it.getQtde()));
+            if (opcPromocional.isSelected()) {
+                row[3] = it.getProduto().getValorPromo();
+                row[4] = it.getProduto().getValorPromo().multiply(new BigDecimal(it.getQtde()));
+            } else {
+                row[3] = it.getProduto().getValorVenda();
+                row[4] = it.getProduto().getValorVenda().multiply(new BigDecimal(it.getQtde()));
+            }
             modelo.addRow(row);
 
         });
@@ -75,6 +98,7 @@ public class TelaPdvMain extends javax.swing.JInternalFrame {
                         .map(it -> it.getSubtotal())
                         .reduce(BigDecimal.ZERO, BigDecimal::add));
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -109,6 +133,8 @@ public class TelaPdvMain extends javax.swing.JInternalFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         setClosable(true);
         setTitle("PDV");
@@ -371,6 +397,15 @@ public class TelaPdvMain extends javax.swing.JInternalFrame {
             }
         });
         jMenu1.add(jMenuItem2);
+        jMenu1.add(jSeparator2);
+
+        jMenuItem3.setText("Minhas Vendas");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
 
         jMenuBar1.add(jMenu1);
 
@@ -404,23 +439,25 @@ public class TelaPdvMain extends javax.swing.JInternalFrame {
 
         if (produto != null) {
             txtDesc.setText(produto.getNome());
-           
-            if(opcPromocional.isSelected()){
-                 txtPrecoUnt.setValue(produto.getValorPromo());
-            }else{
-                txtPrecoUnt.setValue(produto.getValorVenda());
-            }
 
             Item item = new Item((Integer) txtQtde.getValue());
             item.setProduto(produto);
+
+            if (opcPromocional.isSelected()) {
+                txtPrecoUnt.setValue(produto.getValorPromo());
+                item.setSubtotal(produto.getValorPromo().multiply(new BigDecimal(item.getQtde())));
+            } else {
+                txtPrecoUnt.setValue(produto.getValorVenda());
+                item.setSubtotal(produto.getValorVenda().multiply(new BigDecimal(item.getQtde())));
+            }
+
             item.setVenda(null);
-            item.setSubtotal(produto.getValorVenda().multiply(new BigDecimal(item.getQtde())));
 
             addItenVenda(item);
             txtCodigoBar.setText("");
             txtCodigoBar.requestFocus();
 
-        }else{
+        } else {
             JOptionPane.showMessageDialog(rootPane, "Produto não encontrado.", "Código inexistente", 0);
             txtCodigoBar.setText("");
             txtCodigoBar.requestFocus();
@@ -459,7 +496,7 @@ public class TelaPdvMain extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-          Venda venda = new Venda();
+        Venda venda = new Venda();
         venda.setDataVenda(LocalDate.now());
         venda.setRepsonsavel(App.nomeUser.getText());
         venda.setTotal(txtTotalVenda.getValue());
@@ -474,8 +511,13 @@ public class TelaPdvMain extends javax.swing.JInternalFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         resetPdv();
-        
+
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        TelaVendas tv = new TelaVendas(null, closable);
+        tv.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -493,6 +535,7 @@ public class TelaPdvMain extends javax.swing.JInternalFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -500,6 +543,7 @@ public class TelaPdvMain extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JCheckBox opcPromocional;
     private javax.swing.JTabbedPane tabMaster;

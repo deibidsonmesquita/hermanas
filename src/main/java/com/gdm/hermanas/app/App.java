@@ -2,11 +2,13 @@ package com.gdm.hermanas.app;
 
 import com.gdm.hermanas.model.Cliente;
 import com.gdm.hermanas.repositorio.ClienteRepository;
+import com.gdm.hermanas.telas.TelaAniversariantes;
 import com.gdm.hermanas.telas.TelaClientes;
 import com.gdm.hermanas.telas.TelaFornecedores;
 import com.gdm.hermanas.telas.TelaMasterLogin;
 import com.gdm.hermanas.telas.TelaPdvMain;
 import com.gdm.hermanas.telas.TelaProdutos;
+import com.gdm.hermanas.telas.TelaRelatorio;
 import com.gdm.hermanas.telas.TelaUsuarios;
 import java.awt.Dimension;
 import java.io.IOException;
@@ -14,6 +16,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -23,6 +26,7 @@ public final class App extends javax.swing.JFrame {
     private TelaClientes telaClientes;
     private TelaProdutos telaProdutos;
     public static int privacity = 0;
+    private List<Cliente> lista;
 
     private TelaPdvMain telaPdv;
 
@@ -179,6 +183,11 @@ public final class App extends javax.swing.JFrame {
         txtAniversariantesAlert.setForeground(new java.awt.Color(145, 143, 143));
         txtAniversariantesAlert.setText("-");
         txtAniversariantesAlert.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        txtAniversariantesAlert.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtAniversariantesAlertMouseClicked(evt);
+            }
+        });
 
         desktop.setLayer(txtAniversariantesAlert, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -301,7 +310,7 @@ public final class App extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void showAniversariantesDoDia() {
-        List<Cliente> lista = new ClienteRepository().lista(Cliente.class);
+        lista = new ClienteRepository().lista(Cliente.class);
 
         lista.forEach(c -> {
             if (!c.getNascimento().equals("  /  /    ") && !c.getNascimento().isBlank()) {
@@ -357,7 +366,8 @@ public final class App extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        JOptionPane.showMessageDialog(rootPane, "Função em desenvolvimento", "Aguarde..", 1);
+        TelaRelatorio tr = new TelaRelatorio(null, rootPaneCheckingEnabled);
+        tr.setVisible(true);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -400,6 +410,21 @@ public final class App extends javax.swing.JFrame {
         telaClientes.setVisible(true);
         telaClientes.toFront();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void txtAniversariantesAlertMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtAniversariantesAlertMouseClicked
+        DefaultListModel<String> model = new DefaultListModel();
+        
+        lista.forEach(it -> model.addElement(it.getNome()+" - "+it.getTelefone1()));
+        
+        TelaAniversariantes ta = new TelaAniversariantes(model);
+        desktop.add(ta);
+        ta.setLocation(desktop.getWidth() - 300, 10);
+        
+        ta.setVisible(true);
+        
+        
+        
+    }//GEN-LAST:event_txtAniversariantesAlertMouseClicked
 
     public void hideFrames() {
         for (JInternalFrame tela : desktop.getAllFrames()) {
