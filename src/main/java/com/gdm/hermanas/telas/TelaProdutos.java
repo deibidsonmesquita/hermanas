@@ -31,17 +31,19 @@ public class TelaProdutos extends javax.swing.JInternalFrame implements ProcessR
         DefaultTableModel modelo = (DefaultTableModel) tabela.getModel();
         modelo.setNumRows(0);
 
-        Object[] row = new Object[8];
+        Object[] row = new Object[9];
         lista.forEach(i -> {
 
             row[0] = i.getId();
             row[1] = i.getNome();
             row[2] = formt.format(i.getValorVenda());
             row[3] = i.getEstoque().getInicial();
-            row[4] = formt.format(i.getValorPromo());
-            row[5] = i.getCor();
-            row[6] = i.getTamanho();
-            row[7] = i.getMargen() + "%";
+            row[4] = i.getEstoque().getInicial() - i.getEstoque().getAtual();
+            row[5] = formt.format(i.getValorPromo());
+            row[6] = i.getCor();
+            row[7] = i.getTamanho();
+            row[8] = i.getMargen() + "%";
+            
 
             modelo.addRow(row);
         });
@@ -66,6 +68,11 @@ public class TelaProdutos extends javax.swing.JInternalFrame implements ProcessR
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
         setMaximizable(true);
         setTitle("Produtos");
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(0, 153, 255));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -79,17 +86,17 @@ public class TelaProdutos extends javax.swing.JInternalFrame implements ProcessR
 
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "CODIGO", "NOME", "PREÇO VENDA", "ESTOQUE", "PROMOÇÃO", "COR", "TAMANHO", "MARGEM (%)"
+                "CODIGO", "NOME", "PREÇO VENDA", "ESTOQUE", "VENDAS", "PROMOÇÃO", "COR", "TAMANHO", "MARGEM (%)"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, true, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -110,10 +117,12 @@ public class TelaProdutos extends javax.swing.JInternalFrame implements ProcessR
             tabela.getColumnModel().getColumn(1).setMinWidth(200);
             tabela.getColumnModel().getColumn(3).setMinWidth(80);
             tabela.getColumnModel().getColumn(3).setMaxWidth(85);
-            tabela.getColumnModel().getColumn(6).setMinWidth(90);
-            tabela.getColumnModel().getColumn(6).setMaxWidth(95);
+            tabela.getColumnModel().getColumn(4).setMinWidth(80);
+            tabela.getColumnModel().getColumn(4).setMaxWidth(85);
             tabela.getColumnModel().getColumn(7).setMinWidth(90);
             tabela.getColumnModel().getColumn(7).setMaxWidth(95);
+            tabela.getColumnModel().getColumn(8).setMinWidth(90);
+            tabela.getColumnModel().getColumn(8).setMaxWidth(95);
         }
 
         busca.setBackground(new java.awt.Color(255, 255, 232));
@@ -132,7 +141,7 @@ public class TelaProdutos extends javax.swing.JInternalFrame implements ProcessR
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 937, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 968, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(busca, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -170,6 +179,7 @@ public class TelaProdutos extends javax.swing.JInternalFrame implements ProcessR
     }//GEN-LAST:event_buscaKeyTyped
 
     private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
+      
         if(evt.getClickCount() > 1){
             long id = (long) tabela.getValueAt(tabela.getSelectedRow(), 0);
             
@@ -177,6 +187,10 @@ public class TelaProdutos extends javax.swing.JInternalFrame implements ProcessR
             tc.setVisible(true);
         }
     }//GEN-LAST:event_tabelaMouseClicked
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+          listagemProdutos();
+    }//GEN-LAST:event_formComponentShown
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

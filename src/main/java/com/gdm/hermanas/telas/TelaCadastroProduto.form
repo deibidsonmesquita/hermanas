@@ -330,7 +330,7 @@
         <Component class="javax.swing.JComboBox" name="txtCor">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="12">
+              <StringArray count="13">
                 <StringItem index="0" value="DOURADO"/>
                 <StringItem index="1" value="PRETO"/>
                 <StringItem index="2" value="BRANCO"/>
@@ -342,7 +342,8 @@
                 <StringItem index="8" value="BEGE"/>
                 <StringItem index="9" value="VERDE"/>
                 <StringItem index="10" value="MARRON"/>
-                <StringItem index="11" value=" "/>
+                <StringItem index="11" value="MULTICOR"/>
+                <StringItem index="12" value=" "/>
               </StringArray>
             </Property>
           </Properties>

@@ -4,7 +4,9 @@
  */
 package com.gdm.hermanas.telas;
 
+import com.gdm.hermanas.model.Produto;
 import com.gdm.hermanas.model.Venda;
+import com.gdm.hermanas.repositorio.ProdutoRepository;
 import com.gdm.hermanas.repositorio.VendaRepository;
 import com.gdm.hermanas.util.ProcessRetorno;
 import java.text.DecimalFormat;
@@ -180,6 +182,19 @@ public class TelaFinalizaVenda extends javax.swing.JDialog {
         }
 
         new VendaRepository().saveOrUpdate(venda);
+        
+        ProdutoRepository repo = new ProdutoRepository();
+        venda.getItens().forEach(it -> {
+               Produto produto = repo.find(Produto.class, it.getProduto().getId());
+               
+               int qtdeAtual = produto.getEstoque().getAtual();
+               
+               produto.getEstoque().setAtual( qtdeAtual - it.getQtde() );
+               repo.saveOrUpdate(produto);
+        });
+        
+        
+        
         JOptionPane.showMessageDialog(rootPane, "Venda efetuada com sucesso.", " Venda confirmada", 1);
         retornoPDV.update();
         dispose();

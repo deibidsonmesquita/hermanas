@@ -17,6 +17,6 @@ public class Fornecedor implements Serializable {
     private String nome;
     private String fone;
     private String email;
-    
+    private String ramo;
 
 }

@@ -44,6 +44,7 @@ public class TelaRelatorio extends javax.swing.JDialog {
     private void resumo(LocalDate date) {
         txtTicketDiario.setText(format.format(repository.ticketDiario(date)));
         txtTotalDiario.setText(format.format(repository.total(date)));
+        txtTotalAcumulado.setText(format.format(repository.totalAcumulado()));
     }
     
     
@@ -64,7 +65,7 @@ public class TelaRelatorio extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        txtTotalAcumulado = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtTotalClientes = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -153,8 +154,8 @@ public class TelaRelatorio extends javax.swing.JDialog {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Total Acumulado"));
 
-        jLabel3.setForeground(new java.awt.Color(0, 102, 0));
-        jLabel3.setText("R$ 0,00");
+        txtTotalAcumulado.setForeground(new java.awt.Color(0, 102, 0));
+        txtTotalAcumulado.setText("R$ 0,00");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -162,14 +163,14 @@ public class TelaRelatorio extends javax.swing.JDialog {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3)
+                .addComponent(txtTotalAcumulado)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3)
+                .addComponent(txtTotalAcumulado)
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
@@ -311,7 +312,6 @@ public class TelaRelatorio extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
@@ -320,6 +320,7 @@ public class TelaRelatorio extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private com.toedter.calendar.JDateChooser txtDataDiaria;
     private javax.swing.JLabel txtTicketDiario;
+    private javax.swing.JLabel txtTotalAcumulado;
     private javax.swing.JLabel txtTotalClientes;
     private javax.swing.JLabel txtTotalDiario;
     private javax.swing.JLabel txtTotalFornecedores;

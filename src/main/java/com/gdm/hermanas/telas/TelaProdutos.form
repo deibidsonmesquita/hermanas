@@ -10,6 +10,9 @@
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
   </SyntheticProperties>
+  <Events>
+    <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="formComponentShown"/>
+  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -28,7 +31,7 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jScrollPane1" pref="937" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="968" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Component id="busca" min="-2" pref="313" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -85,11 +88,12 @@
         <Component class="javax.swing.JTable" name="tabela">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="8" rowCount="4">
+              <Table columnCount="9" rowCount="4">
                 <Column editable="false" title="CODIGO" type="java.lang.Object"/>
                 <Column editable="false" title="NOME" type="java.lang.Object"/>
                 <Column editable="false" title="PRE&#xc7;O VENDA" type="java.lang.Object"/>
                 <Column editable="false" title="ESTOQUE" type="java.lang.Object"/>
+                <Column editable="true" title="VENDAS" type="java.lang.Object"/>
                 <Column editable="false" title="PROMO&#xc7;&#xc3;O" type="java.lang.Object"/>
                 <Column editable="false" title="COR" type="java.lang.Object"/>
                 <Column editable="false" title="TAMANHO" type="java.lang.Object"/>
@@ -109,6 +113,11 @@
                   <Renderer/>
                 </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="85" minWidth="80" prefWidth="-1" resizable="true">
                   <Title/>
                   <Editor/>
                   <Renderer/>

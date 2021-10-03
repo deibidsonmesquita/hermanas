@@ -43,4 +43,15 @@ public class VendaRepository extends GenericDao<Venda>{
         session.getTransaction().commit();        
         return tm != 0L ? total(data).divide(new BigDecimal(tm)) : BigDecimal.ZERO;
     }
+     
+      public BigDecimal totalAcumulado(){
+        Optional<BigDecimal> total;
+        try (Session session = factory.openSession()) {
+            session.beginTransaction();
+            Query<BigDecimal> querytotal = session.createQuery("SELECT SUM(v.total) FROM Venda v");
+            total = querytotal.uniqueResultOptional();
+            session.getTransaction().commit();
+        }
+        return total.isPresent() ? total.get() : BigDecimal.ZERO;
+    }
 }
