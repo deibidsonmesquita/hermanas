@@ -16,7 +16,10 @@ import com.gdm.hermanas.repositorio.VendaRepository;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -35,11 +38,17 @@ public class TelaRelatorio extends javax.swing.JDialog {
         resumo(LocalDate.now());
 
         contadosRelatorio();
+        txtDataDiaria.setDate(Calendar.getInstance().getTime());
     }
 
     private void resumo(LocalDate date) {
         txtTicketDiario.setText(format.format(repository.ticketDiario(date)));
         txtTotalDiario.setText(format.format(repository.total(date)));
+    }
+    
+    
+    public ImageIcon icone() {
+        return new ImageIcon(getClass().getResource("/imagens/icons8-calendar-16.png"));
     }
 
     @SuppressWarnings("unchecked")
@@ -49,9 +58,9 @@ public class TelaRelatorio extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         txtTotalDiario = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        txtDataDiaria = new comp.JCalendar();
         jLabel12 = new javax.swing.JLabel();
         txtTicketDiario = new javax.swing.JLabel();
+        txtDataDiaria = new com.toedter.calendar.JDateChooser();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -66,6 +75,7 @@ public class TelaRelatorio extends javax.swing.JDialog {
         txtTotalProduto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Resumo");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Total Diário"));
 
@@ -84,36 +94,39 @@ public class TelaRelatorio extends javax.swing.JDialog {
         txtTicketDiario.setForeground(new java.awt.Color(51, 102, 0));
         txtTicketDiario.setText("0.00");
 
+        txtDataDiaria.setDateFormatString("dd/MM/yyyy");
+        txtDataDiaria.setIcon(icone());
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(txtTotalDiario, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTotalDiario, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtTicketDiario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                .addComponent(txtDataDiaria, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtTicketDiario, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtDataDiaria, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtDataDiaria, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtTotalDiario)
                             .addComponent(jLabel12)
                             .addComponent(txtTicketDiario))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtDataDiaria, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -140,6 +153,7 @@ public class TelaRelatorio extends javax.swing.JDialog {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Total Acumulado"));
 
+        jLabel3.setForeground(new java.awt.Color(0, 102, 0));
         jLabel3.setText("R$ 0,00");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -229,7 +243,7 @@ public class TelaRelatorio extends javax.swing.JDialog {
                     .addComponent(txtTotalFornecedores)
                     .addComponent(jLabel10)
                     .addComponent(txtTotalProduto))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
@@ -238,7 +252,10 @@ public class TelaRelatorio extends javax.swing.JDialog {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate dataBusca = LocalDate.parse(txtDataDiaria.getText().trim(), formatter);
+        
+        LocalDate dataBusca = txtDataDiaria.getDate()
+                .toInstant().atZone(ZoneId.systemDefault())
+                .toLocalDate();
 
         resumo(dataBusca);
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -301,7 +318,7 @@ public class TelaRelatorio extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private comp.JCalendar txtDataDiaria;
+    private com.toedter.calendar.JDateChooser txtDataDiaria;
     private javax.swing.JLabel txtTicketDiario;
     private javax.swing.JLabel txtTotalClientes;
     private javax.swing.JLabel txtTotalDiario;

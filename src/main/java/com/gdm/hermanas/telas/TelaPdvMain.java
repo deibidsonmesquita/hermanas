@@ -138,6 +138,7 @@ public class TelaPdvMain extends javax.swing.JInternalFrame implements ProcessRe
         jMenuItem3 = new javax.swing.JMenuItem();
 
         setClosable(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
         setTitle("PDV");
 
         jPanel3.setBackground(new java.awt.Color(191, 216, 232));
@@ -405,6 +406,7 @@ public class TelaPdvMain extends javax.swing.JInternalFrame implements ProcessRe
         jMenu1.add(jMenuItem2);
         jMenu1.add(jSeparator2);
 
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-impressão-16.png"))); // NOI18N
         jMenuItem3.setText("Minhas Vendas");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

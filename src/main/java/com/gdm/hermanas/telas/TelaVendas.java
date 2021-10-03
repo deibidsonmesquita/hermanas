@@ -7,7 +7,10 @@ package com.gdm.hermanas.telas;
 
 import com.gdm.hermanas.model.Venda;
 import com.gdm.hermanas.repositorio.VendaRepository;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -25,6 +28,11 @@ public class TelaVendas extends javax.swing.JDialog {
 
         repository = new VendaRepository();
         listagemVendas();
+        txtDataVenda.setDate(Calendar.getInstance().getTime());
+    }
+    
+     public ImageIcon icone() {
+        return new ImageIcon(getClass().getResource("/imagens/icons8-calendar-16.png"));
     }
 
     private void listagemVendas() {
@@ -38,7 +46,7 @@ public class TelaVendas extends javax.swing.JDialog {
         lista.forEach(i -> {
 
             row[0] = i.getId();
-            row[1] = i.getDataVenda();
+            row[1] = i.getDataVenda().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
             row[2] = i.getTotal();
             row[3] = i.getRepsonsavel();
             row[4] = i.getPgto();
@@ -60,14 +68,15 @@ public class TelaVendas extends javax.swing.JDialog {
         tabela = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         busca = new javax.swing.JTextField();
-        jCalendar1 = new comp.JCalendar();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         btnDelete = new javax.swing.JButton();
+        txtDataVenda = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Vendas Efetuadas");
 
+        tabela.setAutoCreateRowSorter(true);
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -114,6 +123,9 @@ public class TelaVendas extends javax.swing.JDialog {
             }
         });
 
+        txtDataVenda.setDateFormatString("dd/MM/yyyy");
+        txtDataVenda.setIcon(icone());
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -123,8 +135,8 @@ public class TelaVendas extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(3, 3, 3)
+                .addComponent(txtDataVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
                 .addGap(18, 18, 18)
                 .addComponent(btnDelete)
@@ -138,16 +150,16 @@ public class TelaVendas extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(busca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel2)
-                        .addComponent(btnDelete)))
+                        .addComponent(btnDelete))
+                    .addComponent(txtDataVenda, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -218,10 +230,10 @@ public class TelaVendas extends javax.swing.JDialog {
     private javax.swing.JButton btnDelete;
     private javax.swing.JTextField busca;
     private javax.swing.JButton jButton1;
-    private comp.JCalendar jCalendar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabela;
+    private com.toedter.calendar.JDateChooser txtDataVenda;
     // End of variables declaration//GEN-END:variables
 }

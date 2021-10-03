@@ -43,6 +43,9 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/imagens/icons8-impress&#xe3;o-16.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Minhas Vendas"/>
               </Properties>
               <Events>
@@ -56,6 +59,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="closable" type="boolean" value="true"/>
+    <Property name="defaultCloseOperation" type="int" value="1"/>
     <Property name="title" type="java.lang.String" value="PDV"/>
   </Properties>
   <SyntheticProperties>
