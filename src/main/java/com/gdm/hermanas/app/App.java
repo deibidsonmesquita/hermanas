@@ -326,7 +326,7 @@ public final class App extends javax.swing.JFrame {
 
         if (!lista.isEmpty()) {
             txtAniversariantesAlert.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/aniversario.png")));
-            txtAniversariantesAlert.setText("Aniversáriante(s) do dia");
+            txtAniversariantesAlert.setText("Aniversariante(s) do dia");
         }
     }
 

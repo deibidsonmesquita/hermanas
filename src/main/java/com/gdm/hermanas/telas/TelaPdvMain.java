@@ -201,7 +201,15 @@ public class TelaPdvMain extends javax.swing.JInternalFrame implements ProcessRe
             new String [] {
                 "N°", "Descrição", "Qtde", "Unit.", "SubTotal"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tabelaCupom.setGridColor(new java.awt.Color(250, 250, 250));
         tabelaCupom.setRowHeight(25);
         tabelaCupom.setShowVerticalLines(true);
@@ -382,9 +390,10 @@ public class TelaPdvMain extends javax.swing.JInternalFrame implements ProcessRe
                 .addContainerGap())
         );
 
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/share.png"))); // NOI18N
         jMenu1.setText("Atalhos");
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F10, 0));
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F11, 0));
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/ok.png"))); // NOI18N
         jMenuItem1.setText("Finalizar Venda");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -406,6 +415,7 @@ public class TelaPdvMain extends javax.swing.JInternalFrame implements ProcessRe
         jMenu1.add(jMenuItem2);
         jMenu1.add(jSeparator2);
 
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F7, 0));
         jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-list-16.png"))); // NOI18N
         jMenuItem3.setText("Minhas Vendas");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {

@@ -43,7 +43,7 @@ public class TelaCadastroProduto extends javax.swing.JDialog {
 
         int count = 0;
         for (Fornecedor it : fornecedores) {
-            nomes[count] = it.getNome();
+            nomes[count] = it.getNome().toUpperCase();
             count++;
         }
         txtFornecedor.setModel(new DefaultComboBoxModel<>(nomes));
@@ -339,6 +339,7 @@ public class TelaCadastroProduto extends javax.swing.JDialog {
 
                 JOptionPane.showMessageDialog(panel, "Cadastro efetuado com sucesso", "Confirmação", 1);
                 processRetorno.update();
+                limpar();
 
             } else {
                 JOptionPane.showMessageDialog(panel, "Preencha todos os campos", "Atenção", 0);
@@ -451,4 +452,16 @@ public class TelaCadastroProduto extends javax.swing.JDialog {
     private javax.swing.JTextField txtcodigoBar;
     private javax.swing.JTextField txtnome;
     // End of variables declaration//GEN-END:variables
+
+    
+     private void limpar(){
+        txtnome.setText("");
+        txtObs.setText("");
+        txtValorCusto.setValue(BigDecimal.ZERO);
+        txtValorVenda.setValue(BigDecimal.ZERO);
+        txtValorPromocao.setValue(BigDecimal.ZERO);
+        txtajuste.setText("0");
+        txtEstoque.setText("");
+        txtcodigoBar.setText("");
+    }
 }

@@ -87,7 +87,15 @@ public class TelaVendas extends javax.swing.JDialog {
             new String [] {
                 "Código", "Data", "Total", "Responsável", "Pagamento"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tabela.setGridColor(new java.awt.Color(236, 234, 234));
         tabela.setRowHeight(25);
         tabela.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -175,7 +183,7 @@ public class TelaVendas extends javax.swing.JDialog {
     }//GEN-LAST:event_buscaKeyTyped
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        long id = (long) tabela.getValueAt(tabela.getSelectedRow(), 0);
+        long id = Long.parseLong(tabela.getValueAt(tabela.getSelectedRow(), 0).toString());
         new VendaRepository().deleteById(Venda.class, id);
         listagemVendas();
     }//GEN-LAST:event_btnDeleteActionPerformed

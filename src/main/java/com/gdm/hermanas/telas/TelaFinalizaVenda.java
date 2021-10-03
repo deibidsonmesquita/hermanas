@@ -80,9 +80,11 @@ public class TelaFinalizaVenda extends javax.swing.JDialog {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Total da Venda");
 
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/share.png"))); // NOI18N
         jMenu1.setText("Atalhos");
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-credit-card-16.png"))); // NOI18N
         jMenuItem1.setText("CARTÃO");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,6 +95,7 @@ public class TelaFinalizaVenda extends javax.swing.JDialog {
         jMenu1.add(jSeparator1);
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-money-16.png"))); // NOI18N
         jMenuItem2.setText("DINHEIRO");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

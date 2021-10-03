@@ -7,6 +7,7 @@ package com.gdm.hermanas.repositorio;
 
 import com.gdm.hermanas.model.Venda;
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.time.LocalDate;
 import java.util.Optional;
 import org.hibernate.Session;
@@ -41,7 +42,7 @@ public class VendaRepository extends GenericDao<Venda>{
     
          
         session.getTransaction().commit();        
-        return tm != 0L ? total(data).divide(new BigDecimal(tm)) : BigDecimal.ZERO;
+        return tm != 0L ? total(data).divide(new BigDecimal(tm), MathContext.DECIMAL32) : BigDecimal.ZERO;
     }
      
       public BigDecimal totalAcumulado(){
