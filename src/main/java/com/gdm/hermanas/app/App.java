@@ -2,6 +2,7 @@ package com.gdm.hermanas.app;
 
 import com.gdm.hermanas.model.Cliente;
 import com.gdm.hermanas.repositorio.ClienteRepository;
+import com.gdm.hermanas.telas.TelaAjuda;
 import com.gdm.hermanas.telas.TelaAniversariantes;
 import com.gdm.hermanas.telas.TelaClientes;
 import com.gdm.hermanas.telas.TelaFornecedores;
@@ -70,6 +71,7 @@ public final class App extends javax.swing.JFrame {
         jSeparator9 = new javax.swing.JPopupMenu.Separator();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Hermanas  v1.0");
@@ -261,6 +263,15 @@ public final class App extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Ajuda");
+
+        jMenuItem5.setText("Informações");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem5);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -428,6 +439,11 @@ public final class App extends javax.swing.JFrame {
         
     }//GEN-LAST:event_txtAniversariantesAlertMouseClicked
 
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        TelaAjuda aj = new TelaAjuda(this, rootPaneCheckingEnabled);
+        aj.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
     public void hideFrames() {
         for (JInternalFrame tela : desktop.getAllFrames()) {
             tela.hide();
@@ -483,6 +499,7 @@ public final class App extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;

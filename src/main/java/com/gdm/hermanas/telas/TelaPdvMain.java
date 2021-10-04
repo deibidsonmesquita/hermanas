@@ -455,7 +455,11 @@ public class TelaPdvMain extends javax.swing.JInternalFrame implements ProcessRe
         
         Produto produto = new ProdutoRepository().find(Produto.class, codigo);
         
+        
+        
         if (produto != null) {
+            
+            if(produto.getEstoque().getAtual() >= (Integer) txtQtde.getValue()){
             txtDesc.setText(produto.getNome());
             
             Item item = new Item((Integer) txtQtde.getValue());
@@ -474,6 +478,9 @@ public class TelaPdvMain extends javax.swing.JInternalFrame implements ProcessRe
             addItenVenda(item);
             txtCodigoBar.setText("");
             txtCodigoBar.requestFocus();
+            }else{
+               JOptionPane.showMessageDialog(rootPane, "Quantidade desejada indisponível.\nQuantidade em Estoque: "+produto.getEstoque().getAtual(), "Diminua a quantidade", 0); 
+            }
             
         } else {
             JOptionPane.showMessageDialog(rootPane, "Produto não encontrado.", "Código inexistente", 0);
@@ -501,11 +508,14 @@ public class TelaPdvMain extends javax.swing.JInternalFrame implements ProcessRe
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (txtTotalVenda.getValue().intValue() > 0) {
+           
             Venda venda = new Venda();
             venda.setDataVenda(LocalDate.now());
             venda.setRepsonsavel(App.nomeUser.getText());
             venda.setTotal(txtTotalVenda.getValue());
             venda.setItens(itensVenda);
+            
+            itensVenda.stream().forEach(it -> it.setVenda(venda));
           
             
             TelaFinalizaVenda fn = new TelaFinalizaVenda(null, closable, venda, this);

@@ -311,7 +311,7 @@ public class TelaCadastroProduto extends javax.swing.JDialog {
 
                 produto.setNome(txtnome.getText().toUpperCase());
                 produto.setCodbar(txtcodigoBar.getText());
-                produto.setObs(txtObs.getText());
+                produto.setObs(txtObs.getText().toUpperCase());
                 produto.setAjuste(Double.valueOf(txtajuste.getText()));
                 produto.setCor(txtCor.getSelectedItem().toString());
                 produto.setUnd(txtUnt.getSelectedItem().toString());
@@ -359,12 +359,9 @@ public class TelaCadastroProduto extends javax.swing.JDialog {
             produto.setValorCusto(txtValorCusto.getValue());
             produto.setMargen(Double.parseDouble(txtajuste.getText().replace(",", ".")));
 
-            Estoque eq = new Estoque();
-            eq.setInicial(Integer.parseInt(String.valueOf(txtEstoque.getValue())));
-            eq.setAtual(eq.getInicial());
-            eq.setMinimo(1);
-
-            produto.setEstoque(eq);
+            produto.getEstoque().setAtual(Integer.parseInt(String.valueOf(txtEstoque.getValue())));
+            produto.getEstoque().setInicial(Integer.parseInt(String.valueOf(txtEstoque.getValue())));
+            
             new ProdutoRepository().saveOrUpdate(produto);
             JOptionPane.showMessageDialog(panel, "Atualização efetuada com sucesso", "Atualizado", 1);
             processRetorno.update();

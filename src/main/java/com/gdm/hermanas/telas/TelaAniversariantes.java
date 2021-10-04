@@ -35,7 +35,7 @@ public class TelaAniversariantes extends javax.swing.JInternalFrame {
         txtList = new javax.swing.JList<>();
 
         setClosable(true);
-        setTitle("Aniversáriantes");
+        setTitle("Aniversariantes");
 
         txtList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
