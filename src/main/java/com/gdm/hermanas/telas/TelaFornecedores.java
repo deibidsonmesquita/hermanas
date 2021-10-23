@@ -9,6 +9,7 @@ import com.gdm.hermanas.model.Fornecedor;
 import com.gdm.hermanas.repositorio.FornecedorRepository;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -41,7 +42,7 @@ public class TelaFornecedores extends javax.swing.JDialog {
             row[1] = i.getNome().toUpperCase();
             row[2] = i.getEmail();
             row[3] = i.getFone();
-            row[4] = i.getRamo().toUpperCase();
+            row[4] = i.getRamo();
 
             modelo.addRow(row);
         });
@@ -64,7 +65,7 @@ public class TelaFornecedores extends javax.swing.JDialog {
         email = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jTextField3 = new javax.swing.JTextField();
+        txtbusca = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtRamo = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -116,6 +117,12 @@ public class TelaFornecedores extends javax.swing.JDialog {
             }
         });
 
+        txtbusca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtbuscaKeyTyped(evt);
+            }
+        });
+
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icons8-pesquisar-24.png"))); // NOI18N
 
         txtRamo.setText("Ex ROUPAS, BIJU");
@@ -137,7 +144,7 @@ public class TelaFornecedores extends javax.swing.JDialog {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 742, Short.MAX_VALUE)
                     .addComponent(nome)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtbusca, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -181,7 +188,7 @@ public class TelaFornecedores extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtbusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addContainerGap())
         );
@@ -195,7 +202,7 @@ public class TelaFornecedores extends javax.swing.JDialog {
         f.setEmail(email.getText());
         f.setFone(fone.getText());
         f.setNome(nome.getText());
-        f.setRamo(txtRamo.getText());
+        f.setRamo(txtRamo.getText().toUpperCase());
         
         repository.saveOrUpdate(f);
         listagem();
@@ -204,6 +211,13 @@ public class TelaFornecedores extends javax.swing.JDialog {
     private void txtRamoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtRamoMouseClicked
         txtRamo.setText("");
     }//GEN-LAST:event_txtRamoMouseClicked
+
+    private void txtbuscaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscaKeyTyped
+        DefaultTableModel table = (DefaultTableModel) tabela.getModel();
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(table);
+        tabela.setRowSorter(tr);
+        tr.setRowFilter(javax.swing.RowFilter.regexFilter(txtbusca.getText().toUpperCase()));
+    }//GEN-LAST:event_txtbuscaKeyTyped
 
    
 
@@ -217,9 +231,9 @@ public class TelaFornecedores extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField nome;
     private javax.swing.JTable tabela;
     private javax.swing.JTextField txtRamo;
+    private javax.swing.JTextField txtbusca;
     // End of variables declaration//GEN-END:variables
 }

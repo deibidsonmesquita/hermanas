@@ -58,28 +58,28 @@ public class TelaCadastroCliente extends javax.swing.JDialog {
         setTitle("Cadastro");
         setBackground(new java.awt.Color(217, 233, 249));
 
-        panel.setBackground(new java.awt.Color(44, 75, 98));
+        panel.setBackground(new java.awt.Color(168, 206, 231));
 
         txtrg.setBorder(null);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setText("Nome completo:");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("CPF:");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel3.setForeground(new java.awt.Color(102, 102, 102));
         jLabel3.setText("RG:");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setText("Telefone 1:");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel5.setForeground(new java.awt.Color(102, 102, 102));
         jLabel5.setText("Nascimento:");
 
         jButton1.setBackground(new java.awt.Color(204, 255, 204));
@@ -107,15 +107,15 @@ public class TelaCadastroCliente extends javax.swing.JDialog {
         }
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel6.setForeground(new java.awt.Color(102, 102, 102));
         jLabel6.setText("Endereço:");
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel7.setForeground(new java.awt.Color(102, 102, 102));
         jLabel7.setText("N°:");
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel8.setForeground(new java.awt.Color(102, 102, 102));
         jLabel8.setText("Cidade:");
 
         txtcidade.setText("MIRANDA DO NORTE");
@@ -125,13 +125,13 @@ public class TelaCadastroCliente extends javax.swing.JDialog {
         txtcep.setBorder(null);
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel9.setForeground(new java.awt.Color(102, 102, 102));
         jLabel9.setText("Bairro:");
 
         txtbairro.setBorder(null);
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel10.setForeground(new java.awt.Color(102, 102, 102));
         jLabel10.setText("Cep:");
 
         txtfone2.setBorder(null);
@@ -151,16 +151,16 @@ public class TelaCadastroCliente extends javax.swing.JDialog {
         txtcpf.setBorder(null);
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel11.setForeground(new java.awt.Color(102, 102, 102));
         jLabel11.setText("Sexo:");
 
         txtend.setBorder(null);
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel12.setForeground(new java.awt.Color(102, 102, 102));
         jLabel12.setText("Telefone 2:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MA", "SP", "PI", "RJ", "BA", "TO", "PA", "RN", "RO" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MA", "MG", "SP", "PI", "RJ", "BA", "TO", "PA", "RN", "RO" }));
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
