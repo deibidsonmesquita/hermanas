@@ -59,6 +59,7 @@ public class TelaFinalizaVenda extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Concluir Venda");
+        setAlwaysOnTop(true);
 
         jLabel1.setText("Forma de Pagamento:");
 
